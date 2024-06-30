@@ -1,0 +1,13 @@
+#pragma once
+#include "CFClass.h"
+#include "CFObject.h"
+#include "CFArray.h"
+#include "CFBool.h"
+#include "CFBox.h"
+#include "CFDouble.h"
+#include "CFHash.h"
+#include "CFInt.h"
+#include "CFMap.h"
+#include "CFRange.h"
+#include "CFRefPool.h"
+#include "CFString.h"
