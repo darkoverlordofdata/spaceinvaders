@@ -1,8 +1,6 @@
 # hello-world
 
 port of mwbryant/wasm4-space-invaders simple space invaders clone to c23
-using port of midar/corefw (mod naming convention)
-using port of mackyle/blocksruntime
 
 ## Building
 

@@ -1,6 +1,7 @@
 #pragma once
+#include "corefw.h"
 #include <stdbool.h>
 #include <stdint.h>
 
 
-uint32_t clamp(uint32_t value, uint32_t lower, uint32_t upper);
+UInt32 clamp(UInt32 value, UInt32 lower, UInt32 upper);

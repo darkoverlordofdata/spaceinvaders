@@ -14,7 +14,8 @@ ctor(void *ptr, va_list args)
     void* component;
     int index=0;
 
-    this->aspect = (AspectTypes)va_arg(args, long);
+    this->kind = (EntityType)va_arg(args, long);
+    this->aspect = (AspectType)va_arg(args, long);
 
 	while ((component = va_arg(args, void*)) != NULL) {
         if (CFClass(component) == Status){

@@ -4,7 +4,7 @@
 #include "Status.h"
 #include "Position.h"
 
-uint8_t  PlayerData[105]= {
+UInt8 PlayerData[105]= {
     0x55,0x55,0x14,0x55,0x55,0x55,0x42,0x96,
     0x81,0x55,0x55,0x52,0x96,0x85,0x55,0x55,
     0x56,0x96,0x95,0x55,0x55,0x50,0x00,0x05,
@@ -21,17 +21,18 @@ uint8_t  PlayerData[105]= {
     0x01 
 };
 
-uint8_t EnemyData[16]= { 
+UInt8 EnemyData[16]= { 
     0x28,0x28,0x55,0x55,0x55,0x55,0x55,0x55,
     0x16,0x94,0x15,0x54,0x05,0x50,0x0c,0x30 
 };
 
-uint8_t BulletData[4]= {
+UInt8 BulletData[4]= {
     0x00, 0x00, 0x00, 0x00,
 };
 
 EntityRef CreatePlayer() {
-    return CFCreate(Entity, AspectStatus | AspectPosition | AspectSprite,
+    return CFCreate(Entity, EntityPlayer,
+                            AspectStatus | AspectPosition | AspectSprite,
                             CFCreate(Status, true), 
                             CFCreate(Position, 80, 129), 
                             CFCreate(Sprite, 20, 21, BLIT_2BPP, 0b0010001100000100, &PlayerData),
@@ -39,7 +40,8 @@ EntityRef CreatePlayer() {
 }
 
 EntityRef CreateBullet() {
-    return CFCreate(Entity, AspectStatus | AspectPosition | AspectSprite,
+    return CFCreate(Entity, EntityBullet,
+                            AspectStatus | AspectPosition | AspectSprite,
                             CFCreate(Status, false), 
                             CFCreate(Position, 0, 0), 
                             CFCreate(Sprite, 1, 4, BLIT_1BPP, 0b0000000000000011, &BulletData),
@@ -47,7 +49,8 @@ EntityRef CreateBullet() {
 }
 
 EntityRef CreateEnemy(int x, int y) {
-    return CFCreate(Entity, AspectStatus | AspectPosition | AspectSprite,
+    return CFCreate(Entity, EntityEnemy,
+                            AspectStatus | AspectPosition | AspectSprite,
                             CFCreate(Status, true), 
                             CFCreate(Position, x, y), 
                             CFCreate(Sprite, 8, 8, BLIT_2BPP, 0b0010001101000000, &EnemyData),

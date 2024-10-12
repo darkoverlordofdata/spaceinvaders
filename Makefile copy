@@ -30,10 +30,9 @@ else
 endif
 
 
+MODULES   := CF
 
 OBJECTS = $(patsubst src/%.c, build/%.o, $(wildcard src/*.c))
-OBJECTS += $(patsubst src/CF/%.c, build/CF/%.o, $(wildcard src/CF/*.c))
-OBJECTS += $(patsubst src/Block/%.c, build/Block/%.o, $(wildcard src/Block/*.c))
 
 OBJECTS += $(patsubst src/%.cpp, build/%.o, $(wildcard src/*.cpp))
 
@@ -49,10 +48,10 @@ else
 endif
 
 ifeq ($(DETECTED_OS), Windows)
-	MKDIR_BUILD = if not exist build md build  build/CF  build/Block
+	MKDIR_BUILD = if not exist build md build
 	RMDIR = rd /s /q
 else
-	MKDIR_BUILD = mkdir -p build build/CF  build/Block
+	MKDIR_BUILD = mkdir -p build
 	RMDIR = rm -rf
 endif
 
@@ -70,15 +69,7 @@ endif
 endif
 
 # Compile C sources
-build/%.o: src/%.c 
-	@$(MKDIR_BUILD)
-	$(CC) -c $< -o $@ $(CFLAGS)
-
-build/CF/%.o: src/CF/%.c 
-	@$(MKDIR_BUILD)
-	$(CC) -c $< -o $@ $(CFLAGS)
-
-build/Block/%.o: src/Block/%.c 
+build/%.o: src/%.c # src/CF/%.c
 	@$(MKDIR_BUILD)
 	$(CC) -c $< -o $@ $(CFLAGS)
 

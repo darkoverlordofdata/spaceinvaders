@@ -1,6 +1,5 @@
 #pragma once
-#include "CFClass.h"
-#include "CFObject.h"
+#include "corefw.h" // IWYU pragma: keep
 
 typedef struct __Position* PositionRef;
 extern CFClassRef Position;

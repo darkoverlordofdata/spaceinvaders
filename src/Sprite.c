@@ -1,16 +1,17 @@
 #include <stdbool.h>
 #include "Sprite.h"
+#include "corefw.h"
 
 static bool
 ctor(void *ptr, va_list args)
 {
 	SpriteRef sprite = ptr;
 
-	sprite->width = (uint32_t)va_arg(args, long);
-	sprite->height = (uint32_t)va_arg(args, long);
-	sprite->flags = (uint32_t)va_arg(args, long);
-    sprite->colors = (uint16_t)va_arg(args, long);
-    sprite->data = (uint8_t*)va_arg(args, void*);
+	sprite->width = (UInt32)va_arg(args, long);
+	sprite->height = (UInt32)va_arg(args, long);
+	sprite->flags = (UInt32)va_arg(args, long);
+    sprite->colors = (UInt16)va_arg(args, long);
+    sprite->data = (UInt8*)va_arg(args, void*);
 
 
 	return true;

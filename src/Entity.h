@@ -1,5 +1,5 @@
 #pragma once
-#include "CFClass.h"
+#include "corefw.h" // IWYU pragma: keep
 #include "Sprite.h"
 #include "Component.h"
 
@@ -8,7 +8,8 @@ extern CFClassRef Entity;
 
 struct __Entity {
     struct __CFObject obj;
-    AspectTypes aspect;
+    AspectType aspect;
+    EntityType kind;
     void* component[32];
 
 } ;

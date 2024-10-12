@@ -1,0 +1,244 @@
+#include "Game.h"
+#include "wasm4.h"
+#include "util.h"
+#include "Factory.h"
+
+typedef void (^FireBullet)(UInt32, UInt32);
+
+const int RgbGrey               = 0xfbf7f3; // seashell
+const int RgbRed                = 0x20283d; // mainly red
+const int RgbOrange             = 0xe5b083; // medium light orange
+const int RgbGreen              = 0x426e5d; // mostly green
+const int GunCooldownMax        = 15;       // timeout between shots
+const int XTimerReset           = 5;
+const int XDirectionTimerReset  = XTimerReset * 29;
+
+
+
+static bool
+ctor(void *ptr, va_list args)
+{
+	(void)args;
+	GameRef this = ptr;
+	return true;
+}
+
+bool GameStart(GameRef this) 
+{
+	this->lost = false;
+	this->notPlayed = true;
+    this->gunCooldown = 0;
+    this->enemyXTimer = XTimerReset;
+    this->enemyXChangeDirectionTimer = XDirectionTimerReset;
+
+    this->enemyXMovement = 1;
+    this->enemyYMovement = 1;
+	
+	void (^block)() = ^{
+
+		this->player = CreatePlayer();
+		this->bullets = CFCreate(CFArray, NULL);
+		for (int i=0; i<8; i++) {
+			CFArrayPush(this->bullets, CreateBullet());
+		}
+		this->enemies = CFCreate(CFArray, NULL);
+		for (int row=0; row<3; row++) {
+			for (int col=1; col<9; col++) {
+				CFArrayPush(this->enemies, CreateEnemy(17*col - 14, 17*row + 3));
+			}
+		}
+	};
+	block();
+	return true;
+}
+
+bool GameUpdate(GameRef this)
+{
+    if (GameOver(this)) return true;
+    GameInputSystem(this);
+    GameMovementSystem(this);
+    GameDrawSystem(this);
+    GameCollisionSystem(this);
+	return true;
+}
+
+
+
+bool GameOver(GameRef this)
+{
+    //
+    // display status
+    //
+	PALETTE[0]=RgbGrey;
+	PALETTE[1]=RgbRed;
+	PALETTE[2]=RgbOrange;
+    PALETTE[3]=RgbGreen;
+    *DRAW_COLORS = 0b0010001101000000;
+
+    if (this->lost) {
+        PALETTE[0]=RgbRed;
+        PALETTE[1]=RgbGrey;
+        PALETTE[2]=RgbOrange;
+        PALETTE[3]=RgbGreen;
+
+
+        *DRAW_COLORS = 0b0000000000000011;
+        if (this->notPlayed) {
+            tone(100 | 2000 << 16, 60, 100, TONE_NOISE | TONE_MODE2);
+            this->notPlayed = false;
+        }
+        text("Loser!", 60, 10);
+        text("SKILL ISSUE!", 35, 20);
+        return true;
+    }
+    bool alive = false;
+    for (ulong index=0; index < CFArraySize(this->enemies); index++) {
+        EntityRef enemy = CFArrayGet(this->enemies, index);
+        alive = alive | EntityIsAlive(enemy);
+    }
+ 
+    if(!alive) {
+       *DRAW_COLORS = 0b0000000000000010;
+        text("You're Winner", 31, 40);
+        if (this->notPlayed) {
+            tone(100 | 2000 << 16, 60, 100, TONE_TRIANGLE | TONE_MODE2);
+            this->notPlayed = false;
+        }
+        return true;
+    }
+    return false;
+
+}
+
+
+bool GameInputSystem(GameRef this)
+{
+    //
+    // input system
+    //
+    this->gunCooldown -= 1;
+    FireBullet Fire = ^(UInt32 x, UInt32 y){
+
+        for (ulong index=0; index < CFArraySize(this->bullets); index++) {
+            EntityRef bullet = CFArrayGet(this->bullets, index);
+            if (!EntityIsAlive(bullet)) {
+                tone(800 | 200 << 16, 5, 100, TONE_TRIANGLE);
+                this->gunCooldown = GunCooldownMax;
+                EntitySetAlive(bullet, true);
+                EntitySetPos(bullet, x, y);
+                break;
+            }
+        }
+    };
+
+
+    if ((*GAMEPAD1 & BUTTON_1) != 0 && this->gunCooldown < 0) {
+        Fire(EntityX(this->player)+18, EntityY(this->player)+2);
+        Fire(EntityX(this->player)+1, EntityY(this->player)+2);
+    }
+    return true;
+
+}
+
+bool GameMovementSystem(GameRef this)
+{
+    int delta = 0;
+
+    if (*GAMEPAD1 & BUTTON_LEFT) {
+        delta = -1;
+    }
+    if (*GAMEPAD1 & BUTTON_RIGHT) {
+        delta = +1;
+    }
+    int x = (int)EntityX(this->player);
+    UInt32 y = EntityY(this->player);
+    UInt32 w = EntitySprite(this->player)->width;
+
+    EntitySetPos(this->player, clamp((UInt32)(x+delta), 0, 160-w), y);
+
+    for (ulong index=0; index < CFArraySize(this->bullets); index++) {
+        EntityRef bullet = CFArrayGet(this->bullets, index);
+        if (EntityIsAlive(bullet)) {
+            UInt32 x1 = EntityX(bullet);
+            long y1 = (long)EntityY(bullet) - 4;
+
+            if (y1 < 0) {
+                EntitySetAlive(bullet, false);
+            }
+            EntitySetPos(bullet, x1, (UInt32)y1);
+        }
+    }
+
+
+    return true;
+}
+
+
+bool GameDrawSystem(GameRef this)
+{
+    EntityDraw(this->player);
+
+    for (ulong index=0; index < CFArraySize(this->bullets); index++) {
+        EntityRef bullet = CFArrayGet(this->bullets, index);
+        if (EntityIsAlive(bullet)) {
+            EntityDraw(bullet);
+        }
+    }
+
+
+    return true;
+}
+
+bool GameCollisionSystem(GameRef this)
+{
+    //
+    // collision system
+    //
+    this->enemyXTimer -= 1;
+    this->enemyXChangeDirectionTimer -= 1;
+    this->enemyYMovement = 0;
+    if (this->enemyXChangeDirectionTimer <= 0) {
+        this->enemyXMovement = -this->enemyXMovement;
+        this->enemyYMovement = 5;
+        this->enemyXChangeDirectionTimer = XDirectionTimerReset;
+    }
+
+    for (ulong enemy_index=0; enemy_index < CFArraySize(this->enemies); enemy_index++) {
+        EntityRef enemy = CFArrayGet(this->enemies, enemy_index);
+        for (ulong bullet_index=0; bullet_index < CFArraySize(this->bullets); bullet_index++) {
+            EntityRef bullet = CFArrayGet(this->bullets, bullet_index);
+            if (EntityIntersect(enemy, bullet)) {
+                tone(800 | 200 << 16, 20, 70, TONE_NOISE);
+                EntitySetAlive(bullet, false);
+                EntitySetAlive(enemy, false);
+            }
+        }
+        if (this->enemyXTimer <= 0) {
+            UInt32 x1 = EntityX(enemy) + this->enemyXMovement;
+            UInt32 y1 = EntityY(enemy) + this->enemyYMovement;
+            EntitySetPos(enemy, x1, y1);
+            if (EntityIsAlive(enemy) && y1 > 120) {
+                this->lost = true;
+            }
+        }
+        if (EntityIsAlive(enemy)) {
+            EntityDraw(enemy);
+        }
+    }
+
+    if(this->enemyXTimer <= 0) {
+        this->enemyXTimer = XTimerReset;
+    }
+    return true;
+}
+
+static struct __CFClass class = {
+	.name = "Game",
+	.size = sizeof(struct __Game),
+	.ctor = ctor,
+	// .equal = equal,
+	// .hash = hash,
+	// .copy = copy
+};
+CFClassRef Game = &class;
+
