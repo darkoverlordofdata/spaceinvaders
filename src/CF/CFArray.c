@@ -47,7 +47,7 @@ ctor(void *ptr, va_list args)
 	array->size = 0;
 
 	while ((obj = va_arg(args, void*)) != NULL)
-		if (!CFArrayPush(array, obj))
+		if (!CFArray_Push(array, obj))
 			return false;
 
 	return true;
@@ -129,7 +129,7 @@ copy(void *ptr)
 }
 
 void*
-CFArrayGet(CFArrayRef array, size_t index)
+CFArray_Get(CFArrayRef array, size_t index)
 {
 	if (index >= array->size)
 		return NULL;
@@ -138,13 +138,13 @@ CFArrayGet(CFArrayRef array, size_t index)
 }
 
 size_t
-CFArraySize(CFArrayRef array)
+CFArray_Size(CFArrayRef array)
 {
 	return array->size;
 }
 
 bool
-CFArraySet(CFArrayRef array, size_t index, void *ptr)
+CFArray_Set(CFArrayRef array, size_t index, void *ptr)
 {
 	CFObjectRef obj = ptr;
 	CFObjectRef old;
@@ -161,7 +161,7 @@ CFArraySet(CFArrayRef array, size_t index, void *ptr)
 }
 
 bool
-CFArrayPush(CFArrayRef array, void *ptr)
+CFArray_Push(CFArrayRef array, void *ptr)
 {
 	CFObjectRef obj = ptr;
 	void **new;
@@ -183,7 +183,7 @@ CFArrayPush(CFArrayRef array, void *ptr)
 }
 
 void*
-CFArrayLast(CFArrayRef array)
+CFArray_Last(CFArrayRef array)
 {
 	if (array->size == 0)
 		return NULL;
@@ -192,7 +192,7 @@ CFArrayLast(CFArrayRef array)
 }
 
 bool
-CFArrayPop(CFArrayRef array)
+CFArray_Pop(CFArrayRef array)
 {
 	void **new;
 	void *last;
@@ -223,7 +223,7 @@ CFArrayPop(CFArrayRef array)
 }
 
 bool
-CFArrayContains(CFArrayRef array, void *ptr)
+CFArray_Contains(CFArrayRef array, void *ptr)
 {
 	size_t i;
 
@@ -235,7 +235,7 @@ CFArrayContains(CFArrayRef array, void *ptr)
 }
 
 bool
-CFArrayContainsPtr(CFArrayRef array, void *ptr)
+CFArray_ContainsPtr(CFArrayRef array, void *ptr)
 {
 	size_t i;
 
@@ -247,7 +247,7 @@ CFArrayContainsPtr(CFArrayRef array, void *ptr)
 }
 
 size_t
-CFArrayFind(CFArrayRef array, void *ptr)
+CFArray_Find(CFArrayRef array, void *ptr)
 {
 	size_t i;
 
@@ -259,7 +259,7 @@ CFArrayFind(CFArrayRef array, void *ptr)
 }
 
 size_t
-CFArrayFindPtr(CFArrayRef array, void *ptr)
+CFArray_FindPtr(CFArrayRef array, void *ptr)
 {
 	size_t i;
 

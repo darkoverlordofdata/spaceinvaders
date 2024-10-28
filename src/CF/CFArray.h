@@ -30,14 +30,14 @@
 typedef struct __CFArray* CFArrayRef;
 extern CFClassRef CFArray;
 
-extern size_t CFArraySize(CFArrayRef);
-extern void* CFArrayGet(CFArrayRef, size_t);
-extern bool CFArraySet(CFArrayRef, size_t, void*);
-extern bool CFArrayPush(CFArrayRef, void*);
-extern void* CFArrayLast(CFArrayRef);
-extern bool CFArrayPop(CFArrayRef);
-extern bool CFArrayContains(CFArrayRef, void*);
-extern bool CFArrayContainsPtr(CFArrayRef, void*);
-extern size_t CFArrayFind(CFArrayRef, void*);
-extern size_t CFArrayFindPtr(CFArrayRef, void*);
+extern size_t   CFArray_Size(CFArrayRef);
+extern void*    CFArray_Get(CFArrayRef, size_t);
+extern bool     CFArray_Set(CFArrayRef, size_t, void*);
+extern bool     CFArray_Push(CFArrayRef, void*);
+extern void*    CFArray_Last(CFArrayRef);
+extern bool     CFArray_Pop(CFArrayRef);
+extern bool     CFArray_Contains(CFArrayRef, void*);
+extern bool     CFArray_ContainsPtr(CFArrayRef, void*);
+extern size_t   CFArray_Find(CFArrayRef, void*);
+extern size_t   CFArray_FindPtr(CFArrayRef, void*);
 

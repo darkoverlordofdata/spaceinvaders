@@ -15,14 +15,12 @@ struct __Entity {
 } ;
 
 
-void EntityDraw(EntityRef entity);
-
-bool EntityIntersect(EntityRef e1, EntityRef e2);    
-
-bool EntityIsAlive(EntityRef);
-void EntitySetAlive(EntityRef, bool);
-uint32_t EntityX(EntityRef);
-uint32_t EntityY(EntityRef);
-SpriteRef EntitySprite(EntityRef);
-void EntitySetPos(EntityRef, uint32_t x, uint32_t y);
+void        Entity_Draw(EntityRef entity);
+bool        Entity_Intersect(EntityRef e1, EntityRef e2);    
+bool        Entity_IsAlive(EntityRef);
+void        Entity_SetAlive(EntityRef, bool);
+uint32_t    Entity_X(EntityRef);
+uint32_t    Entity_Y(EntityRef);
+SpriteRef   Entity_Sprite(EntityRef);
+void        Entity_SetPos(EntityRef, uint32_t x, uint32_t y);
 

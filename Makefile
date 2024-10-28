@@ -19,6 +19,7 @@ ifeq ($(DEBUG), 1)
 else
 	CFLAGS += -DNDEBUG -Oz -flto
 endif
+CFLAGS += -I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/
 
 # Linker flags
 LDFLAGS = -Wl,-zstack-size=14752,--no-entry,--import-memory -mexec-model=reactor \

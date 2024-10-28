@@ -17,6 +17,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/Component.o",
       "src/Component.c"
@@ -43,6 +44,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/Entity.o",
       "src/Entity.c"
@@ -69,6 +71,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/Factory.o",
       "src/Factory.c"
@@ -95,6 +98,34 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
+      "-o",
+      "build/Game.o",
+      "src/Game.c"
+    ],
+    "directory": "/home/darko/Documents/GitHub/spaceinvaders",
+    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/Game.c",
+    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/Game.o"
+  },
+  {
+    "arguments": [
+      "/opt/wasi-sdk/bin/clang",
+      "--sysroot=/opt/wasi-sdk/share/wasi-sysroot",
+      "-c",
+      "-std=c2x",
+      "-fblocks",
+      "-W",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-unused",
+      "-Wconversion",
+      "-Wsign-conversion",
+      "-fno-exceptions",
+      "-DNDEBUG",
+      "-Oz",
+      "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/main.o",
       "src/main.c"
@@ -121,6 +152,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/Position.o",
       "src/Position.c"
@@ -147,6 +179,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/Sprite.o",
       "src/Sprite.c"
@@ -173,6 +206,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/Status.o",
       "src/Status.c"
@@ -199,6 +233,34 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
+      "-o",
+      "build/Systems.o",
+      "src/Systems.c"
+    ],
+    "directory": "/home/darko/Documents/GitHub/spaceinvaders",
+    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/Systems.c",
+    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/Systems.o"
+  },
+  {
+    "arguments": [
+      "/opt/wasi-sdk/bin/clang",
+      "--sysroot=/opt/wasi-sdk/share/wasi-sysroot",
+      "-c",
+      "-std=c2x",
+      "-fblocks",
+      "-W",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-unused",
+      "-Wconversion",
+      "-Wsign-conversion",
+      "-fno-exceptions",
+      "-DNDEBUG",
+      "-Oz",
+      "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/util.o",
       "src/util.c"
@@ -225,6 +287,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/CF/CFArray.o",
       "src/CF/CFArray.c"
@@ -251,6 +314,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/CF/CFBool.o",
       "src/CF/CFBool.c"
@@ -277,6 +341,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/CF/CFBox.o",
       "src/CF/CFBox.c"
@@ -303,6 +368,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/CF/CFClass.o",
       "src/CF/CFClass.c"
@@ -329,6 +395,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/CF/CFDouble.o",
       "src/CF/CFDouble.c"
@@ -355,6 +422,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/CF/CFInt.o",
       "src/CF/CFInt.c"
@@ -381,6 +449,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/CF/CFMap.o",
       "src/CF/CFMap.c"
@@ -407,6 +476,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/CF/CFObject.o",
       "src/CF/CFObject.c"
@@ -433,6 +503,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/CF/CFRange.o",
       "src/CF/CFRange.c"
@@ -459,6 +530,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/CF/CFRefPool.o",
       "src/CF/CFRefPool.c"
@@ -485,6 +557,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/CF/CFString.o",
       "src/CF/CFString.c"
@@ -511,6 +584,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/Block/data.o",
       "src/Block/data.c"
@@ -537,6 +611,7 @@
       "-DNDEBUG",
       "-Oz",
       "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
       "build/Block/runtime.o",
       "src/Block/runtime.c"

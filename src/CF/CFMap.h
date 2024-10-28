@@ -38,11 +38,11 @@ typedef struct CFMapIter_t {
 
 
 extern CFClassRef CFMap;
-extern size_t CFMapSize(CFMapRef);
-extern void* CFMapGet(CFMapRef, void*);
-extern void* CFMapGetC(CFMapRef, const char*);
-extern bool CFMapSet(CFMapRef, void*, void*);
-extern bool CFMapSetC(CFMapRef, const char*, void*);
-extern void CFMapIter(CFMapRef, CFMapIter_t*);
-extern void CFMapIterNext(CFMapIter_t*);
+extern size_t 	CFMap_Size(CFMapRef);
+extern void* 	CFMap_Get(CFMapRef, void*);
+extern void* 	CFMap_GetC(CFMapRef, const char*);
+extern bool 	CFMap_Set(CFMapRef, void*, void*);
+extern bool 	CFMap_SetC(CFMapRef, const char*, void*);
+extern void 	CFMap_Iter(CFMapRef, CFMapIter_t*);
+extern void 	CFMap_IterNext(CFMapIter_t*);
 

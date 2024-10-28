@@ -81,7 +81,7 @@ CFCreate(CFClassRef class, ...)
 		va_end(args);
 	}
 
-	if (!CFRefPoolAdd(obj)) {
+	if (!CFRefPool_Add(obj)) {
 		CFUnref(obj);
 		return NULL;
 	}

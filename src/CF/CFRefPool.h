@@ -28,5 +28,5 @@
 
 typedef struct __CFRefPool* CFRefPoolRef;
 extern CFClassRef CFRefPool;
-extern bool CFRefPoolAdd(void*);
+extern bool CFRefPool_Add(void*);
 

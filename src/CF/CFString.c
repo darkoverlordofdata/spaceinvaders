@@ -167,19 +167,19 @@ copy(void *ptr)
 }
 
 char*
-CFStringC(CFStringRef str)
+CFString_C(CFStringRef str)
 {
 	return str->data;
 }
 
 size_t
-CFStringLength(CFStringRef string)
+CFString_Length(CFStringRef string)
 {
 	return string->len;
 }
 
 bool
-CFStringSet(CFStringRef str, const char *cstr)
+CFString_Set(CFStringRef str, const char *cstr)
 {
 	char *copy;
 	size_t len;
@@ -204,7 +204,7 @@ CFStringSet(CFStringRef str, const char *cstr)
 }
 
 void
-CFStringSetNoCopy(CFStringRef str, char *cstr, size_t len)
+CFString_SetNoCopy(CFStringRef str, char *cstr, size_t len)
 {
 	if (str->data != NULL)
 		free(str->data);
@@ -214,7 +214,7 @@ CFStringSetNoCopy(CFStringRef str, char *cstr, size_t len)
 }
 
 bool
-CFStringAppend(CFStringRef str, CFStringRef append)
+CFString_Append(CFStringRef str, CFStringRef append)
 {
 	char *new;
 
@@ -234,7 +234,7 @@ CFStringAppend(CFStringRef str, CFStringRef append)
 }
 
 bool
-CFStringAppendC(CFStringRef str, const char *append)
+CFString_AppendC(CFStringRef str, const char *append)
 {
 	char *new;
 	size_t append_len;
@@ -257,7 +257,7 @@ CFStringAppendC(CFStringRef str, const char *append)
 }
 
 bool
-CFStringHasPrefix(CFStringRef str, CFStringRef prefix)
+CFString_HasPrefix(CFStringRef str, CFStringRef prefix)
 {
 	if (prefix->len > str->len)
 		return false;
@@ -266,7 +266,7 @@ CFStringHasPrefix(CFStringRef str, CFStringRef prefix)
 }
 
 bool
-CFStringHasPrefixC(CFStringRef str, const char *prefix)
+CFString_HasPrefixC(CFStringRef str, const char *prefix)
 {
 	size_t prefix_len = strlen(prefix);
 
@@ -277,7 +277,7 @@ CFStringHasPrefixC(CFStringRef str, const char *prefix)
 }
 
 bool
-CFStringHasSuffix(CFStringRef str, CFStringRef suffix)
+CFString_HasSuffix(CFStringRef str, CFStringRef suffix)
 {
 	if (suffix->len > str->len)
 		return false;
@@ -286,7 +286,7 @@ CFStringHasSuffix(CFStringRef str, CFStringRef suffix)
 }
 
 bool
-CFStringHasSuffixC(CFStringRef str, const char *suffix)
+CFStringHas_SuffixC(CFStringRef str, const char *suffix)
 {
 	size_t suffix_len = strlen(suffix);
 
@@ -297,7 +297,7 @@ CFStringHasSuffixC(CFStringRef str, const char *suffix)
 }
 
 size_t
-CFStringFind(CFStringRef str, CFStringRef substr, CFRange range)
+CFString_Find(CFStringRef str, CFStringRef substr, CFRange range)
 {
 	long i;
 
@@ -319,7 +319,7 @@ CFStringFind(CFStringRef str, CFStringRef substr, CFRange range)
 }
 
 size_t
-CFStringFindC(CFStringRef str, const char *substr, CFRange range)
+CFString_FindC(CFStringRef str, const char *substr, CFRange range)
 {
 	size_t substr_len = strlen(substr);
 	long i;

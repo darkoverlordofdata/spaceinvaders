@@ -13,7 +13,7 @@ GameRef game;
 void start() {
 	pool = CFNew(CFRefPool);
     game = CFNew(Game);
-    GameStart(game);
+    Game_Start(game);
 
 }
 
@@ -21,6 +21,6 @@ void start() {
  * update
  */
 void update () {
-    GameUpdate(game);
+    Game_Update(game);
 }
 

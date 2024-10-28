@@ -28,5 +28,5 @@
 
 typedef struct __CFDouble* CFDoubleRef;
 extern CFClassRef CFDouble;
-extern double CFDoubleValue(CFDoubleRef);
+extern double CFDouble_Value(CFDoubleRef);
 

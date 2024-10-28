@@ -31,41 +31,41 @@ ctor(void *ptr, va_list args)
     }
 	return true;
 }
-uint32_t EntityX(EntityRef this)
+uint32_t Entity_X(EntityRef this)
 {
     PositionRef pos = this->component[ComponentPosition];
     return (uint32_t)pos->x;
 }
-uint32_t EntityY(EntityRef this)
+uint32_t Entity_Y(EntityRef this)
 {
     PositionRef pos = this->component[ComponentPosition];
     return (uint32_t)pos->y;
 }
 
-void EntitySetPos(EntityRef this, uint32_t x, uint32_t y)
+void Entity_SetPos(EntityRef this, uint32_t x, uint32_t y)
 {
     PositionRef pos = this->component[ComponentPosition];
     pos->x = (long)x;
     pos->y = (long)y;
 }
 
-bool EntityIsAlive(EntityRef this)
+bool Entity_IsAlive(EntityRef this)
 {
     StatusRef status = this->component[ComponentStatus];
     return status->alive;
 }
 
-void EntitySetAlive(EntityRef this, bool value)
+void Entity_SetAlive(EntityRef this, bool value)
 {
     StatusRef status = this->component[ComponentStatus];
     status->alive = value;
 }
-SpriteRef EntitySprite(EntityRef this)
+SpriteRef Entity_Sprite(EntityRef this)
 {
     return (SpriteRef)this->component[ComponentSprite];
 }
 
-void EntityDraw(EntityRef this) {
+void Entity_Draw(EntityRef this) {
     SpriteRef sprite = this->component[ComponentSprite];
     PositionRef pos = this->component[ComponentPosition];
     *DRAW_COLORS = sprite->colors;
@@ -73,7 +73,7 @@ void EntityDraw(EntityRef this) {
         sprite->width, sprite->height, sprite->flags);
 }
 
-bool EntityIntersect(EntityRef this, EntityRef that) {
+bool Entity_Intersect(EntityRef this, EntityRef that) {
     SpriteRef sprite = this->component[ComponentSprite];
 
     PositionRef this_pos = this->component[ComponentPosition];

@@ -72,7 +72,7 @@ copy(void *ptr)
 }
 
 intmax_t
-CFIntValue(CFIntRef integer)
+CFInt_Value(CFIntRef integer)
 {
 	return integer->value;
 }

@@ -82,7 +82,7 @@ dtor(void *ptr)
 }
 
 bool
-CFRefPoolAdd(void *ptr)
+CFRefPool_Add(void *ptr)
 {
 	void **ndata;
 
