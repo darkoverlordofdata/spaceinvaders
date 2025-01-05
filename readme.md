@@ -16,7 +16,9 @@ Then run it with:
 w4 run build/cart.wasm
 ```
 
-```publish
+publish
+
+```
 mkdir -p docs
 w4 bundle build/cart.wasm --title "Space Invaders" --html docs/index.html
 ```
