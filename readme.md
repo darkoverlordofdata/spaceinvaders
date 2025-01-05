@@ -16,6 +16,12 @@ Then run it with:
 w4 run build/cart.wasm
 ```
 
+```publish
+mkdir -p docs
+w4 bundle build/cart.wasm --title "Space Invaders" --html docs/index.html
+```
+
+
 For more info about setting up WASM-4, see the [quickstart guide](https://wasm4.org/docs/getting-started/setup?code-lang=c#quickstart).
 
 ## Links
