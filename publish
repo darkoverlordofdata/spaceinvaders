@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# copies packages to docs for staging
+# push to github will finish publication
+
+rm -rf ./docs
+mkdir -p docs
+
+w4 bundle build/cart.wasm --title "Space Invaders" --html-template assets/template.html --html docs/index.html
+
+cp ./assets/manifest.json ./docs
+cp ./assets/serviceworker.js ./docs
+cp ./assets/favicon.png ./docs
+cp ./assets/thumbnail.png ./docs
+cp ./assets/SpaceInvaders.png ./docs
+
+

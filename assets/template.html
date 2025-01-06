@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  {{#html.metadata}}
+  <meta name="{{name}}" content="{{content}}">
+  {{/html.metadata}}
+  {{#html.description}}
+  <meta name="description" content="{{html.description}}">
+  {{/html.description}}
+  {{#html.iconUrl}}
+  <link rel="shortcut icon" href="{{html.iconUrl}}">
+  {{/html.iconUrl}}
+  {{#html.diskPrefix}}
+  <script id="wasm4-disk-prefix" type="text/plain">{{{html.diskPrefix}}}</script>
+  {{/html.diskPrefix}}
+  <title>{{html.title}}</title>
+  <style>{{{html.wasm4Css}}}</style>
+
+	<!-- Meta Tags for Progressive Web App -->
+	<meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+	<meta name="theme-color" content="black">
+
+	<!-- Meta Tags for BlueSky -->
+  <meta property="og:title" content="Space Invaders"/>
+  <meta property="og:type" content="website"/> 
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://darkoverlordofdata.com/spaceinvaders/"/>
+  <meta property="og:description" content="Space Invaders Game"/>
+  <meta property="og:image" content="https://darkoverlordofdata.com/spaceinvaders/thumbnail.png"/>
+
+	<!-- Link to the Manifest File -->
+	<link rel="manifest" href="manifest.json">
+	<link rel="icon" href="./favicon.ico"/>    
+
+</head>
+<body>
+  <script id="wasm4-cart-json" type="application/json">{{{html.wasmCartJson}}}</script>
+  <script>{{{html.wasm4js}}}</script>
+  <wasm4-app></wasm4-app>
+</body>
+</html>

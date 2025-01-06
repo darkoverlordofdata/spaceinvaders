@@ -34,7 +34,7 @@ bool Game_Start(GameRef this)
     this->enemyXMovement = 1;
     this->enemyYMovement = 1;
 	
-	void (^block)() = ^{
+	void (^initialize)() = ^{
 
 		this->player = CreatePlayer();
 		this->bullets = CFCreate(CFArray, NULL);
@@ -48,7 +48,7 @@ bool Game_Start(GameRef this)
 			}
 		}
 	};
-	block();
+	initialize();
 	return true;
 }
 

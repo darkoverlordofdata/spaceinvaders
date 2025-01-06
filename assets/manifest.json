@@ -1,0 +1,18 @@
+{
+    "name":"SpaceInvaders",
+    "short_name":"SpaceInvaders",
+    "start_url":"index.html",
+    "display":"standalone",
+    "background_color":"#5900b3",
+    "theme_color":"black",
+    "scope": ".",
+    "description":"SpaceInvaders Game",
+    "orientation": "portrait-primary",
+    "icons":[
+      {
+      "src":"SpaceInvaders.png",                    
+      "sizes":"256x256",
+      "type":"image/png"
+      }
+    ]
+}
