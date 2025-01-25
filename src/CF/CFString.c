@@ -167,19 +167,19 @@ copy(void *ptr)
 }
 
 char*
-CFString_C(CFStringRef str)
+CFStringC(CFStringRef str)
 {
 	return str->data;
 }
 
 size_t
-CFString_Length(CFStringRef string)
+CFStringLength(CFStringRef string)
 {
 	return string->len;
 }
 
 bool
-CFString_Set(CFStringRef str, const char *cstr)
+CFStringSet(CFStringRef str, const char *cstr)
 {
 	char *copy;
 	size_t len;
@@ -204,7 +204,7 @@ CFString_Set(CFStringRef str, const char *cstr)
 }
 
 void
-CFString_SetNoCopy(CFStringRef str, char *cstr, size_t len)
+CFStringSetNoCopy(CFStringRef str, char *cstr, size_t len)
 {
 	if (str->data != NULL)
 		free(str->data);
@@ -214,7 +214,7 @@ CFString_SetNoCopy(CFStringRef str, char *cstr, size_t len)
 }
 
 bool
-CFString_Append(CFStringRef str, CFStringRef append)
+CFStringAppend(CFStringRef str, CFStringRef append)
 {
 	char *new;
 
@@ -234,7 +234,7 @@ CFString_Append(CFStringRef str, CFStringRef append)
 }
 
 bool
-CFString_AppendC(CFStringRef str, const char *append)
+CFStringAppendC(CFStringRef str, const char *append)
 {
 	char *new;
 	size_t append_len;
@@ -257,7 +257,7 @@ CFString_AppendC(CFStringRef str, const char *append)
 }
 
 bool
-CFString_HasPrefix(CFStringRef str, CFStringRef prefix)
+CFStringHasPrefix(CFStringRef str, CFStringRef prefix)
 {
 	if (prefix->len > str->len)
 		return false;
@@ -266,7 +266,7 @@ CFString_HasPrefix(CFStringRef str, CFStringRef prefix)
 }
 
 bool
-CFString_HasPrefixC(CFStringRef str, const char *prefix)
+CFStringHasPrefixC(CFStringRef str, const char *prefix)
 {
 	size_t prefix_len = strlen(prefix);
 
@@ -277,7 +277,7 @@ CFString_HasPrefixC(CFStringRef str, const char *prefix)
 }
 
 bool
-CFString_HasSuffix(CFStringRef str, CFStringRef suffix)
+CFStringHasSuffix(CFStringRef str, CFStringRef suffix)
 {
 	if (suffix->len > str->len)
 		return false;
@@ -297,7 +297,7 @@ CFStringHas_SuffixC(CFStringRef str, const char *suffix)
 }
 
 size_t
-CFString_Find(CFStringRef str, CFStringRef substr, CFRange range)
+CFStringFind(CFStringRef str, CFStringRef substr, CFRange range)
 {
 	long i;
 
@@ -319,7 +319,7 @@ CFString_Find(CFStringRef str, CFStringRef substr, CFRange range)
 }
 
 size_t
-CFString_FindC(CFStringRef str, const char *substr, CFRange range)
+CFStringFindC(CFStringRef str, const char *substr, CFRange range)
 {
 	size_t substr_len = strlen(substr);
 	long i;

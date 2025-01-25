@@ -28,5 +28,5 @@
 
 typedef struct __CFBox* CFBoxRef;
 extern CFClassRef CFBox;
-extern void*    CFBox_Ptr(CFBoxRef);
-extern uint32_t CFBox_Type(CFBoxRef);
+extern void*    CFBoxPtr(CFBoxRef);
+extern uint32_t CFBoxType(CFBoxRef);

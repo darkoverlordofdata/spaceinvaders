@@ -54,7 +54,7 @@ ctor(void *ptr, va_list args)
 	map->items = 0;
 
 	while ((key = va_arg(args, void*)) != NULL)
-		if (!CFMap_Set(map, key, va_arg(args, void*)))
+		if (!CFMapSet(map, key, va_arg(args, void*)))
 			return false;
 
 	return true;
@@ -96,7 +96,7 @@ equal(void *ptr1, void *ptr2)
 
 	for (i = 0; i < map1->size; i++)
 		if (map1->data[i] != NULL && map1->data[i] != &deleted &&
-		    !CFEqual(CFMap_Get(map2, map1->data[i]->key),
+		    !CFEqual(CFMapGet(map2, map1->data[i]->key),
 		    map1->data[i]->obj))
 			return false;
 
@@ -217,7 +217,7 @@ cfw_map_size(CFMapRef map)
 }
 
 void*
-CFMap_Get(CFMapRef map, void *key)
+CFMapGet(CFMapRef map, void *key)
 {
 	uint32_t i, hash, last;
 
@@ -254,7 +254,7 @@ CFMap_Get(CFMapRef map, void *key)
 }
 
 void*
-CFMap_GetC(CFMapRef map, const char *key)
+CFMapGetC(CFMapRef map, const char *key)
 {
 	CFStringRef str;
 	void *ret;
@@ -262,7 +262,7 @@ CFMap_GetC(CFMapRef map, const char *key)
 	if ((str = CFNew(CFString, key)) == NULL)
 		return NULL;
 
-	ret = CFMap_Get(map, str);
+	ret = CFMapGet(map, str);
 
 	CFUnref(str);
 
@@ -270,7 +270,7 @@ CFMap_GetC(CFMapRef map, const char *key)
 }
 
 bool
-CFMap_Set(CFMapRef map, void *key, void *obj)
+CFMapSet(CFMapRef map, void *key, void *obj)
 {
 	uint32_t i, hash, last;
 
@@ -376,7 +376,7 @@ CFMap_Set(CFMapRef map, void *key, void *obj)
 }
 
 bool
-CFMap_SetC(CFMapRef map, const char *key, void *obj)
+CFMapSetC(CFMapRef map, const char *key, void *obj)
 {
 	CFStringRef str;
 	bool ret;
@@ -384,7 +384,7 @@ CFMap_SetC(CFMapRef map, const char *key, void *obj)
 	if ((str = CFNew(CFString, key)) == NULL)
 		return false;
 
-	ret = CFMap_Set(map, str, obj);
+	ret = CFMapSet(map, str, obj);
 
 	CFUnref(str);
 
@@ -392,16 +392,16 @@ CFMap_SetC(CFMapRef map, const char *key, void *obj)
 }
 
 void
-CFMap_Iter(CFMapRef map, CFMapIter_t *iter)
+CFMapIter(CFMapRef map, CFMapIter_t *iter)
 {
 	iter->_map = map;
 	iter->_pos = 0;
 
-	CFMap_IterNext(iter);
+	CFMapIterNext(iter);
 }
 
 void
-CFMap_IterNext(CFMapIter_t *iter)
+CFMapIterNext(CFMapIter_t *iter)
 {
 	CFMapRef map = iter->_map;
 

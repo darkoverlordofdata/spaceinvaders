@@ -3,11 +3,18 @@
 
 typedef struct __Component* ComponentRef;
 extern CFClassRef Component;
+extern CFClassRef Status;
+extern CFClassRef Position;
+extern CFClassRef Sprite;
+
 
 struct __Component {
     struct __CFObject obj;
 
 } ;
+
+int ComponentSlot(void* component);
+
 
 typedef enum AspectType : unsigned int {
     AspectUnused     = 0x0000,

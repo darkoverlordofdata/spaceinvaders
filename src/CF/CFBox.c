@@ -58,13 +58,13 @@ dtor(void *ptr)
 }
 
 void*
-CFBox_Ptr(CFBoxRef box)
+CFBoxPtr(CFBoxRef box)
 {
 	return box->ptr;
 }
 
 uint32_t
-CFBox_Type(CFBoxRef box)
+CFBoxType(CFBoxRef box)
 {
 	return box->type;
 }

@@ -23,9 +23,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef __COREFW_HASH_H__
-#define __COREFW_HASH_H__
+#pragma once
 
 #define CF_HASH_INIT(hash) hash = 0
 #define CF_HASH_ADD(hash, byte)	\
@@ -49,4 +47,3 @@
 		CF_HASH_ADD(hash, other & 0xFF);		\
 	}
 
-#endif

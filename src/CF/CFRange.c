@@ -29,10 +29,10 @@
 
 #include "CFRange.h"
 
-CFRange CFRange_All = { 0, (long)SIZE_MAX };
+CFRange CFRangeAll = { 0, (long)SIZE_MAX };
 
 CFRange
-CFRange_Make(long start, long length)
+CFRangeMake(long start, long length)
 {
 	CFRange range = { start, length };
 

@@ -35,6 +35,8 @@ endif
 OBJECTS = $(patsubst src/%.c, build/%.o, $(wildcard src/*.c))
 OBJECTS += $(patsubst src/CF/%.c, build/CF/%.o, $(wildcard src/CF/*.c))
 OBJECTS += $(patsubst src/Block/%.c, build/Block/%.o, $(wildcard src/Block/*.c))
+OBJECTS += $(patsubst src/Systems/%.c, build/Systems/%.o, $(wildcard src/Systems/*.c))
+OBJECTS += $(patsubst src/Artemis/%.c, build/Systems/%.o, $(wildcard src/Artemis/*.c))
 
 OBJECTS += $(patsubst src/%.cpp, build/%.o, $(wildcard src/*.cpp))
 
@@ -53,7 +55,7 @@ ifeq ($(DETECTED_OS), Windows)
 	MKDIR_BUILD = if not exist build md build  build/CF  build/Block
 	RMDIR = rd /s /q
 else
-	MKDIR_BUILD = mkdir -p build build/CF  build/Block
+	MKDIR_BUILD = mkdir -p build build/CF  build/Block build/Systems build/Artemis
 	RMDIR = rm -rf
 endif
 
@@ -76,11 +78,19 @@ build/%.o: src/%.c
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 build/CF/%.o: src/CF/%.c 
-	@$(MKDIR_BUILD)
+	@$(MKDIR_BUILD/CF)
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 build/Block/%.o: src/Block/%.c 
-	@$(MKDIR_BUILD)
+	@$(MKDIR_BUILD/Block)
+	$(CC) -c $< -o $@ $(CFLAGS)
+
+build/Systems/%.o: src/Systems/%.c 
+	@$(MKDIR_BUILD/Systems)
+	$(CC) -c $< -o $@ $(CFLAGS)
+
+build/Artemis/%.o: src/Artemis/%.c 
+	@$(MKDIR_BUILD/Artemis)
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 # Compile C++ sources

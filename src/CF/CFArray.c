@@ -26,10 +26,12 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <assert.h>
 
 #include "CFObject.h"
 #include "CFArray.h"
 #include "CFHash.h"
+#include "CFString.h"
 
 struct __CFArray {
 	struct __CFObject obj;
@@ -47,7 +49,7 @@ ctor(void *ptr, va_list args)
 	array->size = 0;
 
 	while ((obj = va_arg(args, void*)) != NULL)
-		if (!CFArray_Push(array, obj))
+		if (!CFArrayPush(array, obj))
 			return false;
 
 	return true;
@@ -129,7 +131,7 @@ copy(void *ptr)
 }
 
 void*
-CFArray_Get(CFArrayRef array, size_t index)
+CFArrayGet(CFArrayRef array, size_t index)
 {
 	if (index >= array->size)
 		return NULL;
@@ -138,13 +140,13 @@ CFArray_Get(CFArrayRef array, size_t index)
 }
 
 size_t
-CFArray_Size(CFArrayRef array)
+CFArraySize(CFArrayRef array)
 {
 	return array->size;
 }
 
 bool
-CFArray_Set(CFArrayRef array, size_t index, void *ptr)
+CFArraySet(CFArrayRef array, size_t index, void *ptr)
 {
 	CFObjectRef obj = ptr;
 	CFObjectRef old;
@@ -161,7 +163,7 @@ CFArray_Set(CFArrayRef array, size_t index, void *ptr)
 }
 
 bool
-CFArray_Push(CFArrayRef array, void *ptr)
+CFArrayPush(CFArrayRef array, void *ptr)
 {
 	CFObjectRef obj = ptr;
 	void **new;
@@ -183,7 +185,7 @@ CFArray_Push(CFArrayRef array, void *ptr)
 }
 
 void*
-CFArray_Last(CFArrayRef array)
+CFArrayLast(CFArrayRef array)
 {
 	if (array->size == 0)
 		return NULL;
@@ -192,7 +194,7 @@ CFArray_Last(CFArrayRef array)
 }
 
 bool
-CFArray_Pop(CFArrayRef array)
+CFArrayPop(CFArrayRef array)
 {
 	void **new;
 	void *last;
@@ -223,7 +225,7 @@ CFArray_Pop(CFArrayRef array)
 }
 
 bool
-CFArray_Contains(CFArrayRef array, void *ptr)
+CFArrayContains(CFArrayRef array, void *ptr)
 {
 	size_t i;
 
@@ -235,7 +237,7 @@ CFArray_Contains(CFArrayRef array, void *ptr)
 }
 
 bool
-CFArray_ContainsPtr(CFArrayRef array, void *ptr)
+CFArrayContainsPtr(CFArrayRef array, void *ptr)
 {
 	size_t i;
 
@@ -247,7 +249,7 @@ CFArray_ContainsPtr(CFArrayRef array, void *ptr)
 }
 
 size_t
-CFArray_Find(CFArrayRef array, void *ptr)
+CFArrayFind(CFArrayRef array, void *ptr)
 {
 	size_t i;
 
@@ -259,7 +261,7 @@ CFArray_Find(CFArrayRef array, void *ptr)
 }
 
 size_t
-CFArray_FindPtr(CFArrayRef array, void *ptr)
+CFArrayFindPtr(CFArrayRef array, void *ptr)
 {
 	size_t i;
 

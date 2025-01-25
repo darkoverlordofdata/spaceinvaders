@@ -1,4 +1,9 @@
 #pragma once
+/**
+ *
+ * liteweight compact framework
+ *
+ */
 #include "CF/CFClass.h"     // IWYU pragma: keep
 #include "CF/CFClass.h"     // IWYU pragma: keep
 #include "CF/CFObject.h"    // IWYU pragma: keep
@@ -12,6 +17,8 @@
 #include "CF/CFRange.h"     // IWYU pragma: keep
 #include "CF/CFRefPool.h"   // IWYU pragma: keep
 #include "CF/CFString.h"    // IWYU pragma: keep
+#include "CF/CFBitVector.h" // IWYU pragma: keep    
+// #include "CF/CFLog.h"       // IWYU pragma: keep
 
 typedef uint8_t UInt8;
 typedef uint16_t UInt16;

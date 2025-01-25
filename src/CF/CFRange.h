@@ -31,5 +31,5 @@ typedef struct CFRange {
 	long length;
 } CFRange;
 
-extern CFRange CFRange_All;
-extern CFRange CFRange_Make(long, long);
+extern CFRange CFRangeAll;
+extern CFRange CFRangeMake(long, long);

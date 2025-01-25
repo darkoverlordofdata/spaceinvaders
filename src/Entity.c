@@ -11,61 +11,49 @@ static bool
 ctor(void *ptr, va_list args)
 {
 	EntityRef this = ptr;
-    void* component;
-    int index=0;
 
     this->kind = (EntityType)va_arg(args, long);
     this->aspect = (AspectType)va_arg(args, long);
 
-	while ((component = va_arg(args, void*)) != NULL) {
-        if (CFClass(component) == Status){
-            index = ComponentStatus;
-        } else if (CFClass(component) == Position){
-            index = ComponentPosition;
-        } else if (CFClass(component) == Sprite){
-            index = ComponentSprite;
-        } else {
-            index = ComponentUnused;
-        }
-        this->component[index] = component;
-    }
-	return true;
+    for (void* component = va_arg(args, void*); component != NULL; component = va_arg(args, void*))
+        this->component[ComponentSlot(component)] = component;
+    return true;
 }
-uint32_t Entity_X(EntityRef this)
+uint32_t EntityX(EntityRef this)
 {
     PositionRef pos = this->component[ComponentPosition];
     return (uint32_t)pos->x;
 }
-uint32_t Entity_Y(EntityRef this)
+uint32_t EntityY(EntityRef this)
 {
     PositionRef pos = this->component[ComponentPosition];
     return (uint32_t)pos->y;
 }
 
-void Entity_SetPos(EntityRef this, uint32_t x, uint32_t y)
+void EntitySetPos(EntityRef this, uint32_t x, uint32_t y)
 {
     PositionRef pos = this->component[ComponentPosition];
     pos->x = (long)x;
     pos->y = (long)y;
 }
 
-bool Entity_IsAlive(EntityRef this)
+bool EntityIsAlive(EntityRef this)
 {
     StatusRef status = this->component[ComponentStatus];
     return status->alive;
 }
 
-void Entity_SetAlive(EntityRef this, bool value)
+void EntitySetAlive(EntityRef this, bool value)
 {
     StatusRef status = this->component[ComponentStatus];
     status->alive = value;
 }
-SpriteRef Entity_Sprite(EntityRef this)
+SpriteRef EntitySprite(EntityRef this)
 {
     return (SpriteRef)this->component[ComponentSprite];
 }
 
-void Entity_Draw(EntityRef this) {
+void EntityDraw(EntityRef this) {
     SpriteRef sprite = this->component[ComponentSprite];
     PositionRef pos = this->component[ComponentPosition];
     *DRAW_COLORS = sprite->colors;
@@ -73,7 +61,7 @@ void Entity_Draw(EntityRef this) {
         sprite->width, sprite->height, sprite->flags);
 }
 
-bool Entity_Intersect(EntityRef this, EntityRef that) {
+bool EntityIntersect(EntityRef this, EntityRef that) {
     SpriteRef sprite = this->component[ComponentSprite];
 
     PositionRef this_pos = this->component[ComponentPosition];

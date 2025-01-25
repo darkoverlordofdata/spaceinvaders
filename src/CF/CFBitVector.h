@@ -23,27 +23,14 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+
 #pragma once
-#include <stddef.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdarg.h>
+#include "CFClass.h"
 
-typedef struct __CFString *CFStringRef;
+typedef struct __CFBitVector* CFBitVectorRef;
+extern CFClassRef CFBitVector;
 
-typedef struct __CFClass* CFClassRef;
-
-struct __CFClass {
-
-	const char *name;
-	size_t size;
-	bool (*ctor)(void*, va_list);
-	void (*dtor)(void*);
-	bool (*equal)(void*, void*);
-	uint32_t (*hash)(void*);
-	void* (*copy)(void*);
-	CFStringRef (*toString)(void*);
-} ;
-
-extern const char* CFClassName(CFClassRef);
+extern size_t   CFBitVectorGetCount(CFBitVectorRef);
+extern bool     CFBitVectorGetBitAtIndex(CFBitVectorRef, size_t);
+extern void     CFBitVectorSetBitAtIndex(CFBitVectorRef, size_t, bool);
 

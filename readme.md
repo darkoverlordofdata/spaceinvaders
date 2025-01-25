@@ -2,6 +2,10 @@
 
 port of mwbryant/wasm4-space-invaders simple space invaders clone to c23
 
+## wip
+
+currently adding artemis too see if an ecs fits in 64k
+
 ## Building
 
 Build the cart by running:

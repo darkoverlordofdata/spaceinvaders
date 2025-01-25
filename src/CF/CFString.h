@@ -35,16 +35,16 @@ extern char*    CFStrDup(const char*);
 extern char*    CFStrnDup(const char*, size_t);
 
 extern CFClassRef CFString;
-extern char*    CFString_C(CFStringRef);
-extern size_t   CFString_Length(CFStringRef);
-extern bool     CFString_Set(CFStringRef, const char*);
-extern void     CFString_SetNoCopy(CFStringRef, char*, size_t);
-extern bool     CFString_Append(CFStringRef, CFStringRef);
-extern bool     CFString_AppendC(CFStringRef, const char*);
-extern bool     CFString_HasPrefix(CFStringRef, CFStringRef);
-extern bool     CFString_HasPrefixC(CFStringRef, const char*);
-extern bool     CFString_HasSuffix(CFStringRef, CFStringRef);
-extern bool     CFString_HasSuffixC(CFStringRef, const char*);
-extern size_t   CFString_Find(CFStringRef, CFStringRef, CFRange);
-extern size_t   CFString_FindC(CFStringRef, const char*, CFRange);
+extern char*    CFStringC(CFStringRef);
+extern size_t   CFStringLength(CFStringRef);
+extern bool     CFStringSet(CFStringRef, const char*);
+extern void     CFStringSetNoCopy(CFStringRef, char*, size_t);
+extern bool     CFStringAppend(CFStringRef, CFStringRef);
+extern bool     CFStringAppendC(CFStringRef, const char*);
+extern bool     CFStringHasPrefix(CFStringRef, CFStringRef);
+extern bool     CFStringHasPrefixC(CFStringRef, const char*);
+extern bool     CFStringHasSuffix(CFStringRef, CFStringRef);
+extern bool     CFStringHasSuffixC(CFStringRef, const char*);
+extern size_t   CFStringFind(CFStringRef, CFStringRef, CFRange);
+extern size_t   CFStringFindC(CFStringRef, const char*, CFRange);
 

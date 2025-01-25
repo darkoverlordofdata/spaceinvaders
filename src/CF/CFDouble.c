@@ -74,7 +74,7 @@ copy(void *ptr)
 }
 
 double
-CFDouble_Value(CFDoubleRef double_)
+CFDoubleValue(CFDoubleRef double_)
 {
 	return double_->value;
 }
