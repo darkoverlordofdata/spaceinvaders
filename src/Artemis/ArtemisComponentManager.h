@@ -1,18 +1,20 @@
 #pragma once
 #include "../corefw.h" // IWYU pragma: keep
-#include "../Entity.h"
 /**
 * 
 */
 typedef struct __ArtemisComponentManager* ArtemisComponentManagerRef;
 extern CFClassRef ArtemisComponentManager;
 
+typedef struct __ArtemisComponentTypeFactory* ArtemisComponentTypeFactoryRef;
+typedef struct __ArtemisComponentPool* ArtemisComponentPoolRef;
+
 struct __ArtemisComponentManager {
     struct __CFObject obj;
-    CFArrayRef      componentsByType;
-    CFObjectRef     pooledComponents;
-    CFArrayRef      deleted;
-    CFObjectRef     typeFactory;
+    CFArrayRef                          componentsByType;
+    ArtemisComponentPoolRef             pooledComponents;
+    CFArrayRef                          deleted;
+    ArtemisComponentTypeFactoryRef      typeFactory;
 };
 
 

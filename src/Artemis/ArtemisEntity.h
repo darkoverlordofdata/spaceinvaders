@@ -1,34 +1,32 @@
 #pragma once
 #include "../corefw.h" // IWYU pragma: keep
-#include "../Entity.h"
 /**
-* The primary instance for the framework. It contains all the managers.
-* 
-* You must use this to create, delete and retrieve entities.
-* 
-* It is also important to set the delta each game loop iteration, and initialize before game loop.
-* 
-* @author Arni Arent
-* 
-*/
-typedef struct __ArtemisWorld* ArtemisWorldRef;
-extern CFClassRef ArtemisWorld;
+ * The entity class. Cannot be instantiated outside the framework, you must
+ * create new entities using World.
+ * 
+ * @author Arni Arent
+ * 
+ */
+typedef struct __ArtemisEntity* ArtemisEntityRef;
+extern CFClassRef ArtemisEntity;
 
-struct __ArtemisWorld {
-    struct __CFObject obj;
-    float       delta;
-    CFMapRef    managers;
-    CFMapRef    systems;
-    CFArrayRef  added;
-    CFArrayRef  changed;
-    CFArrayRef  deleted;
-    CFArrayRef  enable;
-    CFArrayRef  disable;
-    CFObjectRef em;
-    CFObjectRef cm;
+typedef struct __ArtemisWorld* ArtemisWorldRef;
+typedef struct __ArtemisEntityManager* ArtemisEntityManagerRef;
+typedef struct __ArtemisComponentManager* ArtemisComponentManagerRef;
+
+
+struct __ArtemisEntity {
+    struct __CFObject           obj;
+    CFStringRef                 uuid;
+    CFStringRef                 name;
+    int                         id;
+    CFBitVectorRef              componentBits;
+    CFBitVectorRef              systemBits;
+    ArtemisWorldRef             world;
+    ArtemisEntityManagerRef     entityManager;
+    ArtemisComponentManagerRef  componenetManager;
 };
 
 
 
-EntityRef ArtemisWorldCreateEntity(ArtemisWorldRef);
 

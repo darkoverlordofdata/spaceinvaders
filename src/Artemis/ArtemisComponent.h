@@ -8,6 +8,10 @@
 typedef struct __ArtemisComponent* ArtemisComponentRef;
 extern CFClassRef ArtemisComponent;
 
+// typedef struct __ArtemisComponentTypeFactory* ArtemisComponentTypeFactoryRef;
+
+// ArtemisComponentTypeFactoryRef ArtemisAspectTypeFactory;
+
 struct __ArtemisComponent {
     struct __CFObject obj;
 

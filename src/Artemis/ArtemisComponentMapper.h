@@ -12,12 +12,16 @@
 typedef struct __ArtemisComponentMapper* ArtemisComponentMapperRef;
 extern CFClassRef ArtemisComponentMapper;
 
+typedef struct __ArtemisComponentType* ArtemisComponentTypeRef;
+typedef struct __ArtemisClass* ArtemisClassRef;
+
+
 struct __ArtemisComponentMapper {
     struct __CFObject obj;
-    ArtemisWorldRef world;
-    CFObjectRef     type;
-    CFObjectRef     classType;
-    CFArrayRef      components;
+    ArtemisWorldRef                     world;
+    ArtemisComponentTypeRef             type;
+    ArtemisClassRef                     classType;
+    CFArrayRef                          components;
 };
 
 

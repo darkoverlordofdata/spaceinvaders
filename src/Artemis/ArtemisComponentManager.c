@@ -1,4 +1,4 @@
-#include "ArtemisComponentManager.h"
+#include "../artemis.h"
 /**
 * 
 */

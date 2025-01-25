@@ -1,6 +1,5 @@
 #pragma once
 #include "../corefw.h" // IWYU pragma: keep
-#include "ArtemisWorld.h"
 /**
  * An Aspects is used by systems as a matcher against entities, to check if a system is
  * interested in an entity. Aspects define what sort of component types an entity must
@@ -25,6 +24,8 @@
  */
 typedef struct __ArtemisAspect* ArtemisAspectRef;
 extern CFClassRef ArtemisAspect;
+
+typedef struct __ArtemisWorld* ArtemisWorldRef;
 
 struct __ArtemisAspect {
     struct __CFObject obj;

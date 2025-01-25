@@ -1,4 +1,4 @@
-#include "ArtemisWorld.h"
+#include "../artemis.h"
 /**
 * The primary instance for the framework. It contains all the managers.
 * 
@@ -9,7 +9,6 @@
 * @author Arni Arent
 * 
 */
-
 static bool
 ctor(void *ptr, va_list args)
 {

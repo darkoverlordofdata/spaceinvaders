@@ -36,7 +36,7 @@ OBJECTS = $(patsubst src/%.c, build/%.o, $(wildcard src/*.c))
 OBJECTS += $(patsubst src/CF/%.c, build/CF/%.o, $(wildcard src/CF/*.c))
 OBJECTS += $(patsubst src/Block/%.c, build/Block/%.o, $(wildcard src/Block/*.c))
 OBJECTS += $(patsubst src/Systems/%.c, build/Systems/%.o, $(wildcard src/Systems/*.c))
-OBJECTS += $(patsubst src/Artemis/%.c, build/Systems/%.o, $(wildcard src/Artemis/*.c))
+OBJECTS += $(patsubst src/Artemis/%.c, build/Artemis/%.o, $(wildcard src/Artemis/*.c))
 
 OBJECTS += $(patsubst src/%.cpp, build/%.o, $(wildcard src/*.cpp))
 
