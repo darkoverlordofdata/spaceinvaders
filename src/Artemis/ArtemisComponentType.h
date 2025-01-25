@@ -13,7 +13,6 @@ typedef enum ArtemisTaxonomy {
 } ArtemisTaxonomy;
 
 typedef struct __ArtemisComponentManager* ArtemisComponentManagerRef;
-typedef struct __ArtemisClass* ArtemisClassRef;
 
 extern int ArtemisComponentTypeIndex;
 
@@ -21,7 +20,7 @@ struct __ArtemisComponentType {
     struct __CFObject               obj;
     ArtemisComponentManagerRef      componentManager;
     int                             index;
-    ArtemisClassRef                 type;
+    CFClassRef                      type;
     ArtemisTaxonomy                 taxonomy;
 
 };

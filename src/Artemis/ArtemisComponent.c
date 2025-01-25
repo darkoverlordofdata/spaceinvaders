@@ -4,8 +4,7 @@
  * 
  * @author Arni Arent
  */
-static bool
-ctor(void *ptr, va_list args)
+static bool ctor(void *ptr, va_list args)
 {
     (void*)args;
 	ArtemisComponentRef this = ptr;

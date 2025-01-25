@@ -7,11 +7,10 @@
  *
  * @param <A>Class</A> the class type of the component
  */
-static bool
-ctor(void *ptr, va_list args)
+static bool ctor(void *ptr, va_list args)
 {
 	ArtemisComponentMapperRef this = ptr;
-    this->classType = va_arg(args, ArtemisClassRef);
+    this->classType = va_arg(args, CFClassRef);
 	this->world = va_arg(args, ArtemisWorldRef);
     this->type = NULL;
     this->components = NULL;

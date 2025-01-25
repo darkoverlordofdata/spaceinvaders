@@ -211,7 +211,7 @@ resize(CFMapRef map, uint32_t items)
 }
 
 size_t
-cfw_map_size(CFMapRef map)
+CFGetSize(CFMapRef map)
 {
 	return map->items;
 }

@@ -3,12 +3,11 @@
 * 
 */
 
-static bool
-ctor(void *ptr, va_list args)
+static bool ctor(void *ptr, va_list args)
 {
 	ArtemisComponentTypeRef this = ptr;
 
-    this->type = va_arg(args, ArtemisClassRef);
+    this->type = va_arg(args, CFClassRef);
     this->index = va_arg(args, int);
     if (this->index < 0) {
         this->index = ArtemisComponentTypeIndex++;

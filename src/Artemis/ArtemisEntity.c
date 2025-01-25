@@ -6,8 +6,7 @@
  * @author Arni Arent
  * 
  */
-static bool
-ctor(void *ptr, va_list args)
+static bool ctor(void *ptr, va_list args)
 {
     ArtemisEntityRef this = ptr;
 	this->world = va_arg(args, ArtemisWorldRef);

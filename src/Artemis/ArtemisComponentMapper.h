@@ -13,14 +13,13 @@ typedef struct __ArtemisComponentMapper* ArtemisComponentMapperRef;
 extern CFClassRef ArtemisComponentMapper;
 
 typedef struct __ArtemisComponentType* ArtemisComponentTypeRef;
-typedef struct __ArtemisClass* ArtemisClassRef;
 
 
 struct __ArtemisComponentMapper {
     struct __CFObject obj;
     ArtemisWorldRef                     world;
     ArtemisComponentTypeRef             type;
-    ArtemisClassRef                     classType;
+    CFClassRef                          classType;
     CFArrayRef                          components;
 };
 
