@@ -2,6 +2,18 @@
 /**
  *
  */
+struct __ArtemisEntityManager {
+    struct __CFObject   obj;
+    ArtemisWorldRef     world;
+    CFArrayRef          entities;
+    CFBitVectorRef      disabled;
+    int                 active;
+    int                 added;
+    int                 created;
+    int                 deleted;
+
+};
+
 static bool ctor(void *ptr, va_list args)
 {
     (void*)args;

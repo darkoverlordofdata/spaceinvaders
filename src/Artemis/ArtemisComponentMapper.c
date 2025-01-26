@@ -7,6 +7,15 @@
  *
  * @param <A>Class</A> the class type of the component
  */
+struct __ArtemisComponentMapper {
+    struct __CFObject obj;
+    ArtemisWorldRef                     world;
+    ArtemisComponentTypeRef             type;
+    CFClassRef                          classType;
+    CFArrayRef                          components;
+};
+
+
 static bool ctor(void *ptr, va_list args)
 {
 	ArtemisComponentMapperRef this = ptr;

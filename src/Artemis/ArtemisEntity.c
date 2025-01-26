@@ -6,6 +6,18 @@
  * @author Arni Arent
  * 
  */
+struct __ArtemisEntity {
+    struct __CFObject           obj;
+    CFStringRef                 uuid;
+    CFStringRef                 name;
+    int                         id;
+    CFBitVectorRef              componentBits;
+    CFBitVectorRef              systemBits;
+    ArtemisWorldRef             world;
+    ArtemisEntityManagerRef     entityManager;
+    ArtemisComponentManagerRef  componenetManager;
+};
+
 static bool ctor(void *ptr, va_list args)
 {
     ArtemisEntityRef this = ptr;

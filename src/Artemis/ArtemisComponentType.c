@@ -2,6 +2,14 @@
 /**
 * 
 */
+struct __ArtemisComponentType {
+    struct __CFObject               obj;
+    ArtemisComponentManagerRef      componentManager;
+    int                             index;
+    CFClassRef                      type;
+    ArtemisTaxonomy                 taxonomy;
+
+};
 
 static bool ctor(void *ptr, va_list args)
 {

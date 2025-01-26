@@ -1,7 +1,7 @@
 #pragma once
 #include "../corefw.h" // IWYU pragma: keep
 /**
-* 
+* @class ArtemisComponentManager
 */
 extern CFClassRef ArtemisComponentManager;
 

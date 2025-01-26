@@ -7,6 +7,20 @@
  * @author Arni Arent
  *
  */
+struct __ArtemisEntitySystem {
+    struct __CFObject   obj;
+    int                 systemIndex;  
+    ArtemisWorldRef     world;
+    CFArrayRef          actives;
+    ArtemisAspectRef    aspect;
+    CFBitVectorRef      allSet;
+    CFBitVectorRef      exclusionSet;
+    CFBitVectorRef      oneSet;
+    bool                passive;
+    bool                dummy;
+};
+
+
 static bool ctor(void *ptr, va_list args)
 {
 	ArtemisEntitySystemRef this = ptr; 	

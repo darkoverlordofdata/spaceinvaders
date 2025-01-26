@@ -22,11 +22,11 @@
  *
  */
 struct __ArtemisAspect {
-    struct __CFObject obj;
-    CFBitVectorRef  allSet;
-    CFBitVectorRef  exclusionSet;
-    CFBitVectorRef  oneSet;
-    ArtemisWorldRef world;
+	struct __CFObject obj;
+	CFBitVectorRef  allSet;
+	CFBitVectorRef  exclusionSet;
+	CFBitVectorRef  oneSet;
+	ArtemisWorldRef world;
 };
 
 /**

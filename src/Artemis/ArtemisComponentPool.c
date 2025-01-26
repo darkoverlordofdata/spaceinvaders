@@ -9,6 +9,11 @@
 * @author Arni Arent
 * 
 */
+struct __ArtemisComponentPool {
+    struct __CFObject           obj;
+    CFArrayRef                  pools;
+};
+
 static bool ctor(void *ptr, va_list args)
 {
     (void*)args;

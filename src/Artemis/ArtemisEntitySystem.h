@@ -1,34 +1,14 @@
 #pragma once
 #include "../corefw.h" // IWYU pragma: keep
 /**
- * The most raw entity system. It should not typically be used, but you can create your own
- * entity system handling by extending this. It is recommended that you use the other provided
- * entity system implementations.
- * 
- * @author Arni Arent
- *
+ *  @class ArtemisEntitySystem
  */
-typedef struct __ArtemisEntitySystem* ArtemisEntitySystemRef;
 extern CFClassRef ArtemisEntitySystem;
 
-typedef struct __ArtemisWorld* ArtemisWorldRef;
-typedef struct __ArtemisAspect* ArtemisAspectRef;
-typedef struct __ArtemisEntity* ArtemisEntityRef;
-
-
-struct __ArtemisEntitySystem {
-    struct __CFObject   obj;
-    int                 systemIndex;  
-    ArtemisWorldRef     world;
-    CFArrayRef          actives;
-    ArtemisAspectRef    aspect;
-    CFBitVectorRef      allSet;
-    CFBitVectorRef      exclusionSet;
-    CFBitVectorRef      oneSet;
-    bool                passive;
-    bool                dummy;
-};
-
+typedef struct __ArtemisEntitySystem*   ArtemisEntitySystemRef;
+typedef struct __ArtemisWorld*          ArtemisWorldRef;
+typedef struct __ArtemisAspect*         ArtemisAspectRef;
+typedef struct __ArtemisEntity*         ArtemisEntityRef;
 
 void ArtemisEntitySystemBegin(ArtemisEntitySystemRef);
 void ArtemisEntitySystemProcess(ArtemisEntitySystemRef);

@@ -9,6 +9,20 @@
 * @author Arni Arent
 * 
 */
+struct __ArtemisWorld {
+    struct __CFObject           obj;
+    float                       delta;
+    CFMapRef                    managers;
+    CFMapRef                    systems;
+    CFArrayRef                  added;
+    CFArrayRef                  changed;
+    CFArrayRef                  deleted;
+    CFArrayRef                  enable;
+    CFArrayRef                  disable;
+    ArtemisEntityManagerRef     em;
+    ArtemisComponentManagerRef  cm;
+};
+
 static bool ctor(void *ptr, va_list args)
 {
     (void*)args;

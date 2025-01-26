@@ -1,25 +1,13 @@
 #pragma once
 #include "../corefw.h" // IWYU pragma: keep0
 /**
- *
+ *  @class ArtemisEntityManager
  */
-typedef struct __ArtemisEntityManager* ArtemisEntityManagerRef;
 extern CFClassRef ArtemisEntityManager;
 
-typedef struct __ArtemisWorld* ArtemisWorldRef;
-typedef struct __ArtemisEntity* ArtemisEntityRef;
-
-struct __ArtemisEntityManager {
-    struct __CFObject   obj;
-    ArtemisWorldRef     world;
-    CFArrayRef          entities;
-    CFBitVectorRef      disabled;
-    int                 active;
-    int                 added;
-    int                 created;
-    int                 deleted;
-
-};
+typedef struct __ArtemisEntityManager*  ArtemisEntityManagerRef;
+typedef struct __ArtemisWorld*          ArtemisWorldRef;
+typedef struct __ArtemisEntity*         ArtemisEntityRef;
 
 
 ArtemisEntityRef ArtemisEntityManagerCreateEntityInstance(ArtemisEntityManagerRef, CFStringRef);

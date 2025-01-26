@@ -7,6 +7,12 @@
  * @author Arni Arent
  *
  */
+struct __ArtemisIdentifierPool {
+    struct __CFObject   obj;
+    CFArrayRef ids;
+    int nextAvailableId;
+};
+
 static bool ctor(void *ptr, va_list args)
 {
     (void*)args;

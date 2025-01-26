@@ -2,7 +2,13 @@
 /**
 * 
 */
+struct __ArtemisComponentTypeFactory {
+    struct __CFObject           obj;
+    CFMapRef                    componentTypes;
+    int                         componentTypeCount;
+    CFArrayRef                  types;
 
+};
 
 static bool ctor(void *ptr, va_list args)
 {

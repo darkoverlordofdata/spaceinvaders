@@ -4,6 +4,11 @@
  * 
  * @author Arni Arent
  */
+struct __ArtemisComponent {
+    struct __CFObject obj;
+};
+
+
 static bool ctor(void *ptr, va_list args)
 {
     (void*)args;

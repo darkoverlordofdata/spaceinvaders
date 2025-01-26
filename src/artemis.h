@@ -4,6 +4,11 @@
  * Artemis ECS Framework
  *
  */
+typedef enum ArtemisTaxonomy {
+    ArtemisTaxonomy_BASIC, 
+    ArtemisTaxonomy_POOLED
+} ArtemisTaxonomy;
+
 #include "Artemis/ArtemisAspect.h"                  // IWYU pragma: keep
 #include "Artemis/ArtemisComponent.h"               // IWYU pragma: keep
 #include "Artemis/ArtemisComponentManager.h"        // IWYU pragma: keep
