@@ -22,10 +22,10 @@
  * @author Arni Arent
  *
  */
-typedef struct __ArtemisAspect* ArtemisAspectRef;
-typedef struct __ArtemisWorld* ArtemisWorldRef;
-
 extern CFClassRef ArtemisAspect;
+
+typedef struct __ArtemisAspect*     ArtemisAspectRef;
+typedef struct __ArtemisWorld*      ArtemisWorldRef;
 
 void ArtemisAspectSetWorld(ArtemisAspectRef, ArtemisWorldRef);
 CFBitVectorRef ArtemisAspectGetAllSet(ArtemisAspectRef);

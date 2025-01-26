@@ -5,12 +5,8 @@
  * 
  * @author Arni Arent
  */
-typedef struct __ArtemisComponent* ArtemisComponentRef;
 extern CFClassRef ArtemisComponent;
-
-// typedef struct __ArtemisComponentTypeFactory* ArtemisComponentTypeFactoryRef;
-
-// ArtemisComponentTypeFactoryRef ArtemisAspectTypeFactory;
+typedef struct __ArtemisComponent* ArtemisComponentRef;
 
 struct __ArtemisComponent {
     struct __CFObject obj;

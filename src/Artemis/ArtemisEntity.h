@@ -27,7 +27,7 @@ struct __ArtemisEntity {
     ArtemisComponentManagerRef  componenetManager;
 };
 
-int ArtemisEntityGetId(ArtemisEntityRef);
+ulong ArtemisEntityGetId(ArtemisEntityRef);
 CFBitVectorRef ArtemisEntityGetComponentBits(ArtemisEntityRef);
 CFBitVectorRef ArtemisEntityGetSystemBits(ArtemisEntityRef);
 void ArtemisEntityReset(ArtemisEntityRef);

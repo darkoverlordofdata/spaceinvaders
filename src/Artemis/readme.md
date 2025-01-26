@@ -11,3 +11,8 @@ artemis ecs in c
 
 
 
+[artemis](http://entity-systems.wikidot.com/artemis-entity-system-framework) is a ecs engine written in java by gamadu
+
+unfortunately the original source code vanished. there are upgrade and ports but i want the smallest version so i'm using my own typescript port as the base (https://github.com/darkoverlordofdata/artemists)
+
+

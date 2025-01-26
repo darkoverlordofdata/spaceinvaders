@@ -31,9 +31,6 @@ struct __ArtemisAspect {
 
 /**
  * @param {ArtemisWorld} world
- * @param {CFBitVectorRef} allSet
- * @param {CFBitVectorRef} exclusionSet
- * @param {CFBitVectorRef} oneSet
  */
 static bool ctor(void *ptr, va_list args)
 {

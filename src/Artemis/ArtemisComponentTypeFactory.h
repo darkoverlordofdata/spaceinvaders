@@ -22,4 +22,4 @@ struct __ArtemisComponentTypeFactory {
 ArtemisComponentTypeRef ArtemisComponentTypeFactoryGetTypeFor(ArtemisComponentTypeFactoryRef, CFClassRef);
 ulong ArtemisComponentTypeFactoryGetIndexFor(ArtemisComponentTypeFactoryRef, CFClassRef);
 // ArtemisTaxonomy ArtemisComponentTypeFactoryGetTaxonomy(ArtemisComponentTypeFactoryRef, int);
-ulong ArtemisComponentTypeFactoryGetTaxonomy(ArtemisComponentTypeFactoryRef, int);
+ulong ArtemisComponentTypeFactoryGetTaxonomy(ArtemisComponentTypeFactoryRef, ulong);
