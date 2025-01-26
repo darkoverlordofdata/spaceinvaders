@@ -12,7 +12,7 @@
 #include "Artemis/ArtemisEntitySystem.h"            // IWYU pragma: keep
 #include "Artemis/ArtemisWorld.h"                   // IWYU pragma: keep
 #include "Artemis/ArtemisComponentMapper.h"         // IWYU pragma: keep
-// #include "Artemis/ArtemisComponentPool.h"           // IWYU pragma: keep
+#include "Artemis/ArtemisComponentPool.h"           // IWYU pragma: keep
 #include "Artemis/ArtemisComponentType.h"           // IWYU pragma: keep
 #include "Artemis/ArtemisComponentTypeFactory.h"    // IWYU pragma: keep
 #include "Artemis/ArtemisSystemIndexManager.h"      // IWYU pragma: keep

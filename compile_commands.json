@@ -1045,6 +1045,33 @@
       "-flto",
       "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
+      "build/Artemis/ArtemisIdentifierPool.o",
+      "src/Artemis/ArtemisIdentifierPool.c"
+    ],
+    "directory": "/home/darko/Documents/GitHub/spaceinvaders",
+    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/Artemis/ArtemisIdentifierPool.c",
+    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/Artemis/ArtemisIdentifierPool.o"
+  },
+  {
+    "arguments": [
+      "/opt/wasi-sdk/bin/clang",
+      "--sysroot=/opt/wasi-sdk/share/wasi-sysroot",
+      "-c",
+      "-std=c2x",
+      "-fblocks",
+      "-W",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-unused",
+      "-Wconversion",
+      "-Wsign-conversion",
+      "-fno-exceptions",
+      "-DNDEBUG",
+      "-Oz",
+      "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
+      "-o",
       "build/Artemis/ArtemisSystemIndexManager.o",
       "src/Artemis/ArtemisSystemIndexManager.c"
     ],

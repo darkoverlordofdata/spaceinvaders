@@ -9,11 +9,6 @@ extern CFClassRef ArtemisComponentTypeFactory;
 extern ArtemisComponentTypeFactoryRef ArtemisAspectTypeFactory;
 typedef struct __ArtemisComponentType* ArtemisComponentTypeRef;
 
-// typedef enum ArtemisTaxonomy {
-//     ArtemisTaxonomy_BASIC, 
-//     ArtemisTaxonomy_POOLED
-// } ArtemisTaxonomy;
-
 struct __ArtemisComponentTypeFactory {
     struct __CFObject           obj;
     CFMapRef                    componentTypes;
@@ -25,6 +20,6 @@ struct __ArtemisComponentTypeFactory {
 
 
 ArtemisComponentTypeRef ArtemisComponentTypeFactoryGetTypeFor(ArtemisComponentTypeFactoryRef, CFClassRef);
-int ArtemisComponentTypeFactoryGetIndexFor(ArtemisComponentTypeFactoryRef, CFClassRef);
+ulong ArtemisComponentTypeFactoryGetIndexFor(ArtemisComponentTypeFactoryRef, CFClassRef);
 // ArtemisTaxonomy ArtemisComponentTypeFactoryGetTaxonomy(ArtemisComponentTypeFactoryRef, int);
 ulong ArtemisComponentTypeFactoryGetTaxonomy(ArtemisComponentTypeFactoryRef, int);

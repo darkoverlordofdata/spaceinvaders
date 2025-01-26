@@ -23,32 +23,17 @@
  *
  */
 typedef struct __ArtemisAspect* ArtemisAspectRef;
-extern CFClassRef ArtemisAspect;
-
 typedef struct __ArtemisWorld* ArtemisWorldRef;
 
-struct __ArtemisAspect {
-    struct __CFObject obj;
-    CFBitVectorRef  allSet;
-    CFBitVectorRef  exclusionSet;
-    CFBitVectorRef  oneSet;
-    ArtemisWorldRef world;
-};
-
+extern CFClassRef ArtemisAspect;
 
 void ArtemisAspectSetWorld(ArtemisAspectRef, ArtemisWorldRef);
 CFBitVectorRef ArtemisAspectGetAllSet(ArtemisAspectRef);
 CFBitVectorRef ArtemisAspectGetExclusionSet(ArtemisAspectRef);
 CFBitVectorRef ArtemisAspectGetOneSet(ArtemisAspectRef);
-int ArtemisAspectGetIndexFor(ArtemisAspectRef, CFClassRef);
-
-CFBitVectorRef ArtemisAspectAll(CFBitVectorRef, ...);
-CFBitVectorRef ArtemisAspectExclude(CFBitVectorRef, ...);
-CFBitVectorRef ArtemisAspectOne(CFBitVectorRef, ...);
-
-ArtemisAspectRef ArtemisAspectGetAspectFor(CFClassRef, ...);
-ArtemisAspectRef ArtemisAspectGetAspectForAll(CFClassRef, ...);
-ArtemisAspectRef ArtemisAspectGetAspectForoNE(CFClassRef, ...);
-ArtemisAspectRef ArtemisAspectGetEmpty();
+ulong ArtemisAspectGetIndexFor(ArtemisAspectRef, CFClassRef);
+ArtemisAspectRef ArtemisAspectAll(ArtemisAspectRef, ...);
+ArtemisAspectRef ArtemisAspectExclude(ArtemisAspectRef, ...);
+ArtemisAspectRef ArtemisAspectOne(ArtemisAspectRef, ...);
 
 

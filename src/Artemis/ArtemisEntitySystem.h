@@ -49,6 +49,6 @@ void ArtemisEntitySystemEnabled(ArtemisEntitySystemRef, ArtemisEntityRef);
 void ArtemisEntitySystemSetWorld(ArtemisEntitySystemRef, ArtemisWorldRef);
 bool ArtemisEntitySystemIsPassive(ArtemisEntitySystemRef);
 void ArtemisEntitySystemSetPassive(ArtemisEntitySystemRef, bool);
-CFArrayRef ArtemisEntitySystemGetActive(ArtemisEntitySystemRef)
+CFArrayRef ArtemisEntitySystemGetActive(ArtemisEntitySystemRef);
 
 

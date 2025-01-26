@@ -1,11 +1,12 @@
 #pragma once
 #include "../corefw.h" // IWYU pragma: keep
-#include "ArtemisComponentMapper.h"
 /**
 * 
 */
 typedef struct __ArtemisComponentPool* ArtemisComponentPoolRef;
 extern CFClassRef ArtemisComponentPool;
+
+typedef struct __ArtemisComponentType* ArtemisComponentTypeRef;
 
 struct __ArtemisComponentPool {
     struct __CFObject           obj;
