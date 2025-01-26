@@ -1,5 +1,8 @@
 #pragma once
 #include "../corefw.h" // IWYU pragma: keep
+#include "ArtemisAspect.h"
+#include "ArtemisComponentMapper.h"
+#include "ArtemisEntity.h"
 /**
 * 
 */
@@ -18,5 +21,10 @@ struct __ArtemisComponentManager {
 };
 
 
-
-
+CFObjectRef ArtemisComponentManagerCreate(ArtemisComponentManagerRef, ArtemisEntityRef, CFClassRef);
+CFObjectRef ArtemisComponentManagerNewInstance(ArtemisComponentManagerRef, CFClassRef, ArtemisWorldRef);
+void ArtemisComponentManagerAddComponent(ArtemisComponentManagerRef, ArtemisEntityRef, ArtemisComponentTypeRef, CFObjectRef);
+void ArtemisComponentManagerRemoveComponent(ArtemisComponentManagerRef, ArtemisEntityRef, ArtemisComponentTypeRef);
+CFArrayRef ArtemisComponentManagerGetComponentsByType(ArtemisComponentManagerRef, ArtemisComponentTypeRef);
+CFObjectRef ArtemisComponentManagerGetComponent(ArtemisComponentManagerRef, ArtemisEntityRef, ArtemisComponentTypeRef);
+CFArrayRef ArtemisComponentManagerGetComponentsFor(ArtemisComponentManagerRef, ArtemisEntityRef, CFArrayRef);

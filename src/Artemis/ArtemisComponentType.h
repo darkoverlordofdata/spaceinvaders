@@ -27,3 +27,6 @@ struct __ArtemisComponentType {
 
 
 
+CFStringRef ArtemisComponentTypeGetName(ArtemisComponentTypeRef);
+int ArtemisComponentTypeGetIndex(ArtemisComponentTypeRef);
+int ArtemisComponentTypeGetTaxonomy(ArtemisComponentTypeRef);

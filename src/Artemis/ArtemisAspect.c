@@ -26,9 +26,9 @@ static bool ctor(void *ptr, va_list args)
 	ArtemisAspectRef this = ptr;
 
 	this->world = va_arg(args, ArtemisWorldRef);
-    this->allSet = CFCreate(CFBitVector);
-    this->exclusionSet = CFCreate(CFBitVector);
-    this->oneSet = CFCreate(CFBitVector);
+	this->allSet = CFCreate(CFBitVector);
+	this->exclusionSet = CFCreate(CFBitVector);
+	this->oneSet = CFCreate(CFBitVector);
 
 	return true;
 }

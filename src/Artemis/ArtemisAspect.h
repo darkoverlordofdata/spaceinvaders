@@ -36,5 +36,19 @@ struct __ArtemisAspect {
 };
 
 
+void ArtemisAspectSetWorld(ArtemisAspectRef, ArtemisWorldRef);
+CFBitVectorRef ArtemisAspectGetAllSet(ArtemisAspectRef);
+CFBitVectorRef ArtemisAspectGetExclusionSet(ArtemisAspectRef);
+CFBitVectorRef ArtemisAspectGetOneSet(ArtemisAspectRef);
+int ArtemisAspectGetIndexFor(ArtemisAspectRef, CFClassRef);
+
+CFBitVectorRef ArtemisAspectAll(CFBitVectorRef, ...);
+CFBitVectorRef ArtemisAspectExclude(CFBitVectorRef, ...);
+CFBitVectorRef ArtemisAspectOne(CFBitVectorRef, ...);
+
+ArtemisAspectRef ArtemisAspectGetAspectFor(CFClassRef, ...);
+ArtemisAspectRef ArtemisAspectGetAspectForAll(CFClassRef, ...);
+ArtemisAspectRef ArtemisAspectGetAspectForoNE(CFClassRef, ...);
+ArtemisAspectRef ArtemisAspectGetEmpty();
 
 

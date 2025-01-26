@@ -25,4 +25,7 @@ struct __ArtemisComponentMapper {
 
 
 
+CFObjectRef ArtemisComponentMapperGet(ArtemisComponentMapperRef, ArtemisEntityRef);
+bool ArtemisComponentMapperHas(ArtemisComponentMapperRef, ArtemisEntityRef);
+ArtemisComponentMapperRef ArtemisComponentMapperGetFor(CFClassRef, ArtemisWorldRef);
 

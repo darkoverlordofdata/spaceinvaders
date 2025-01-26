@@ -13,7 +13,7 @@ extern CFClassRef ArtemisEntity;
 typedef struct __ArtemisWorld* ArtemisWorldRef;
 typedef struct __ArtemisEntityManager* ArtemisEntityManagerRef;
 typedef struct __ArtemisComponentManager* ArtemisComponentManagerRef;
-
+typedef struct __ArtemisComponentType* ArtemisComponentTypeRef;
 
 struct __ArtemisEntity {
     struct __CFObject           obj;
@@ -27,6 +27,27 @@ struct __ArtemisEntity {
     ArtemisComponentManagerRef  componenetManager;
 };
 
+int ArtemisEntityGetId(ArtemisEntityRef);
+CFBitVectorRef ArtemisEntityGetComponentBits(ArtemisEntityRef);
+CFBitVectorRef ArtemisEntityGetSystemBits(ArtemisEntityRef);
+void ArtemisEntityReset(ArtemisEntityRef);
+CFObjectRef ArtemisEntityCreateComponent(ArtemisEntityRef, CFClassRef, ...);
+ArtemisEntityRef ArtemisEntityAddComponent(ArtemisEntityRef, CFObjectRef, ...);
+ArtemisComponentTypeRef ArtemisEntityGetTypeFor(ArtemisEntityRef, CFObjectRef);
 
+ArtemisEntityRef ArtemisEntityRemoveComponentInstance(ArtemisEntityRef, CFObjectRef);
+ArtemisEntityRef ArtemisEntityRemoveComponent(ArtemisEntityRef, ArtemisComponentTypeRef);
+ArtemisEntityRef ArtemisEntityRemoveComponentByType(ArtemisEntityRef, CFClassRef);
+bool ArtemisEntityIsActive(ArtemisEntityRef);
+bool ArtemisEntityIsEnabled(ArtemisEntityRef);
+CFObjectRef ArtemisEntityGetComponent(ArtemisEntityRef, ArtemisComponentTypeRef);
+CFObjectRef ArtemisEntityGetComponentByType(ArtemisEntityRef, CFClassRef);
+CFArrayRef ArtemisEntityGetComponents(ArtemisEntityRef, CFArrayRef);
+void ArtemisEntityAddToWorld(ArtemisEntityRef);
+void ArtemisEntityDeleteFromWorld(ArtemisEntityRef);
+void ArtemisEntityEnable(ArtemisEntityRef);
+void ArtemisEntityDisable(ArtemisEntityRef);
+CFStringRef ArtemisEntityGetUUID(ArtemisEntityRef);
+ArtemisWorldRef ArtemisEntityGetWorld(ArtemisEntityRef);
 
 
