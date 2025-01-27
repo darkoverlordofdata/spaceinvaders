@@ -17,7 +17,7 @@ struct __ArtemisEntityManager {
 static bool ctor(void *ptr, va_list args)
 {
     (void*)args;
-	ArtemisEntityManagerRef this = ptr;
+    ArtemisEntityManagerRef this = ptr;
 
     this->entities = CFCreate(CFArray, NULL);
     this->disabled = CFCreate(CFBitVector);
@@ -25,7 +25,7 @@ static bool ctor(void *ptr, va_list args)
     this->added = 0;
     this->created = 0;
     this->deleted = 0;
-	return true;
+    return true;
 }
 
 

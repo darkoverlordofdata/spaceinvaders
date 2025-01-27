@@ -17,10 +17,10 @@ static bool ctor(void *ptr, va_list args)
 {
     (void*)args;
 
-	ArtemisIdentifierPoolRef this = ptr; 	
+    ArtemisIdentifierPoolRef this = ptr; 	
     this->ids = CFCreate(CFArray, NULL);
 
-	return true;
+    return true;
 }
 
 

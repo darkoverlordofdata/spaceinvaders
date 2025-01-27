@@ -12,7 +12,7 @@ struct __ArtemisComponentTypeFactory {
 
 static bool ctor(void *ptr, va_list args)
 {
-    (void*)args;
+	(void*)args;
 	ArtemisComponentTypeFactoryRef this = ptr;
 
 	this->componentTypes = CFCreate(CFMap, NULL);

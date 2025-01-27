@@ -23,17 +23,17 @@ struct __ArtemisEntitySystem {
 
 static bool ctor(void *ptr, va_list args)
 {
-	ArtemisEntitySystemRef this = ptr; 	
+    ArtemisEntitySystemRef this = ptr; 	
 
-	this->actives = CFCreate(CFArray, NULL);
-	this->aspect = va_arg(args, ArtemisAspectRef);
-	this->systemIndex = ArtemisSystemIndexManagerGetIndexFor(ArtemisEntitySystem);
+    this->actives = CFCreate(CFArray, NULL);
+    this->aspect = va_arg(args, ArtemisAspectRef);
+    this->systemIndex = ArtemisSystemIndexManagerGetIndexFor(ArtemisEntitySystem);
     this->allSet = CFCreate(CFBitVector);
     this->exclusionSet = CFCreate(CFBitVector);
     this->oneSet = CFCreate(CFBitVector);
-	this->dummy = false;
+    this->dummy = false;
 
-	return true;
+    return true;
 }
 
 

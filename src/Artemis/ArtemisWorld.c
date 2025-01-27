@@ -26,7 +26,7 @@ struct __ArtemisWorld {
 static bool ctor(void *ptr, va_list args)
 {
     (void*)args;
-	ArtemisWorldRef this = ptr;
+    ArtemisWorldRef this = ptr;
     this->managers = CFCreate(CFMap, NULL);
     this->systems = CFCreate(CFMap, NULL);
     this->added = CFCreate(CFArray, NULL);
@@ -35,7 +35,7 @@ static bool ctor(void *ptr, va_list args)
     this->enable = CFCreate(CFArray, NULL);
     this->disable = CFCreate(CFArray, NULL);
 
-	return true;
+    return true;
 }
 
 

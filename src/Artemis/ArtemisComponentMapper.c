@@ -23,12 +23,12 @@ struct __ArtemisComponentMapper {
  */
 static bool ctor(void *ptr, va_list args)
 {
-	ArtemisComponentMapperRef this = ptr;
+    ArtemisComponentMapperRef this = ptr;
     this->classType = va_arg(args, CFClassRef);
-	this->world = va_arg(args, ArtemisWorldRef);
+    this->world = va_arg(args, ArtemisWorldRef);
     this->type = NULL;
     this->components = NULL;
-	return true;
+    return true;
 }
 
 

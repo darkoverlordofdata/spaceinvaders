@@ -16,13 +16,34 @@ struct __ArtemisComponentPool {
 
 static bool ctor(void *ptr, va_list args)
 {
-    (void*)args;
+	(void*)args;
 	ArtemisComponentPoolRef this = ptr;
 
 	this->pools = CFCreate(CFArray, CFCreate(CFArray, NULL), NULL);
 	return true;
 }
 
+CFObjectRef ArtemisComponentPoolObtain(ArtemisComponentPoolRef this, CFClassRef cls, ArtemisComponentTypeRef type)
+{
+	(void*)this;
+	(void*)cls;
+	(void*)type;
+	return NULL;
+}
+
+void ArtemisComponentPoolFree(ArtemisComponentPoolRef this, CFObjectRef component, ArtemisComponentTypeRef type)
+{
+	(void*)this;
+	(void*)component;
+	(void*)type;
+}
+
+void ArtemisComponentPoolFreeByIndex(ArtemisComponentPoolRef pool, CFObjectRef component, ulong typeIndex)
+{
+	(void*)pool;
+	(void*)component;
+	(void*)typeIndex;
+}
 
 static struct __CFClass class = {
 	.name = "ArtemisComponentPool",
