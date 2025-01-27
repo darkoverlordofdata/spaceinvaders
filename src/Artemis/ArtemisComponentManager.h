@@ -11,7 +11,6 @@ typedef struct __ArtemisComponentPool*          ArtemisComponentPoolRef;
 typedef struct __ArtemisEntity*                 ArtemisEntityRef;
 typedef struct __ArtemisComponentType*          ArtemisComponentTypeRef;
 
-
 CFObjectRef ArtemisComponentManagerCreate(ArtemisComponentManagerRef, ArtemisEntityRef, CFClassRef);
 CFObjectRef ArtemisComponentManagerNewInstance(ArtemisComponentManagerRef, CFClassRef, bool);
 void ArtemisComponentManagerAddComponent(ArtemisComponentManagerRef, ArtemisEntityRef, ArtemisComponentTypeRef, CFObjectRef);

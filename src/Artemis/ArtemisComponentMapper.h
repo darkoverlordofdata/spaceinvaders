@@ -11,6 +11,7 @@ typedef struct __ArtemisEntity*             ArtemisEntityRef;
 typedef struct __ArtemisWorld*              ArtemisWorldRef;
 
 CFObjectRef ArtemisComponentMapperGet(ArtemisComponentMapperRef, ArtemisEntityRef);
+CFObjectRef ArtemisComponentMapperGetSafe(ArtemisComponentMapperRef, ArtemisEntityRef);
 bool ArtemisComponentMapperHas(ArtemisComponentMapperRef, ArtemisEntityRef);
 ArtemisComponentMapperRef ArtemisComponentMapperGetFor(CFClassRef, ArtemisWorldRef);
 

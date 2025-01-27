@@ -1,6 +1,6 @@
 #include "../artemis.h"
 /**
-* 
+*   Component Manager Class
 */
 struct __ArtemisComponentManager {
     struct __CFObject                   obj;

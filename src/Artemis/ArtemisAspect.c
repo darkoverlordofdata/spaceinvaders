@@ -30,6 +30,7 @@ struct __ArtemisAspect {
 };
 
 /**
+ *
  * @param {ArtemisWorld} world
  */
 static bool ctor(void *ptr, va_list args)
@@ -75,9 +76,9 @@ ulong ArtemisAspectGetIndexFor(ArtemisAspectRef this, CFClassRef cls)
 
 /**
  * Returns an aspect where an entity must possess all of the specified component types.
- * @param {Class} type a required component type
- * @param {Array<Class>} types a required component type
- * @return {artemis.Aspect} an aspect that can be matched against entities
+ * @param {CFClass} type a required component type
+ * @param {CFArray<CFClass>} types a required component type
+ * @return {ArtemisAspect} an aspect that can be matched against entities
 */
 ArtemisAspectRef ArtemisAspectAll(ArtemisAspectRef this, ...)
 {
@@ -95,9 +96,9 @@ ArtemisAspectRef ArtemisAspectAll(ArtemisAspectRef this, ...)
  * Excludes all of the specified component types from the aspect. A system will not be
  * interested in an entity that possesses one of the specified exclusion component types.
  *
- * @param {Class} type component type to exclude
- * @param {Array<Class>} types component type to exclude
- * @return {artemis.Aspect} an aspect that can be matched against entities
+ * @param {CFClass} type component type to exclude
+ * @param {CFArray<CFClass>} types component type to exclude
+ * @return {ArtemisAspect} an aspect that can be matched against entities
  */
 ArtemisAspectRef ArtemisAspectExclude(ArtemisAspectRef this, ...)
 {
@@ -113,9 +114,9 @@ ArtemisAspectRef ArtemisAspectExclude(ArtemisAspectRef this, ...)
 
 /**
  * Returns an aspect where an entity must possess one of the specified component types.
- * @param {Class} type one of the types the entity must possess
- * @param {Array<Class>} types one of the types the entity must possess
- * @return {artemis.Aspect} an aspect that can be matched against entities
+ * @param {CFClass} type one of the types the entity must possess
+ * @param {CFArray<CFClass>} types one of the types the entity must possess
+ * @return {ArtemisAspect} an aspect that can be matched against entities
  */
 ArtemisAspectRef ArtemisAspectOne(ArtemisAspectRef this, ...)
 {
