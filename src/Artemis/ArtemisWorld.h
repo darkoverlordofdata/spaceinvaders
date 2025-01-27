@@ -25,7 +25,7 @@ void ArtemisWorlDeleteEntity(ArtemisWorldRef, ArtemisEntityRef);
 void ArtemisWorldEnable(ArtemisWorldRef, ArtemisEntityRef);
 void ArtemisWorldDisable(ArtemisWorldRef, ArtemisEntityRef);
 ArtemisEntityRef ArtemisWorldCreateEntity(ArtemisWorldRef, CFStringRef);
-ArtemisEntityRef ArtemisWorldGetEntity(ArtemisWorldRef, int);
+ArtemisEntityRef ArtemisWorldGetEntity(ArtemisWorldRef, ulong);
 CFArrayRef ArtemisWorldGetSystems(ArtemisWorldRef);
 ArtemisEntitySystemRef ArtemisWorldSetSystem(ArtemisWorldRef, ArtemisEntitySystemRef, bool);
 void ArtemisWorldDeleteSystem(ArtemisWorldRef, ArtemisEntitySystemRef);

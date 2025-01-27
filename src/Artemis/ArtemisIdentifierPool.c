@@ -23,6 +23,17 @@ static bool ctor(void *ptr, va_list args)
     return true;
 }
 
+ulong ArtemisIdentifierPoolCheckOut(ArtemisIdentifierPoolRef this)
+{
+    (void*)this;
+    return 0;
+}
+
+void ArtemisIdentifierPoolCheckIn(ArtemisIdentifierPoolRef this, ulong index)
+{
+    (void*)this;
+    (void)index;
+}
 
 static struct __CFClass class = {
     .name = "ArtemisIdentifierPool",

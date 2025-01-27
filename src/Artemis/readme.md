@@ -16,3 +16,6 @@ artemis ecs in c
 unfortunately the original source code vanished. there are upgrade and ports but i want the smallest version so i'm using my own typescript port as the base (https://github.com/darkoverlordofdata/artemists)
 
 
+### notes
+* use ulong for all ints for size_t compat
+* 

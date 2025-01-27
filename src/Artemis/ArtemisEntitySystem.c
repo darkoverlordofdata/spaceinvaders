@@ -9,7 +9,7 @@
  */
 struct __ArtemisEntitySystem {
     struct __CFObject   obj;
-    int                 systemIndex;  
+    ulong               systemIndex;  
     ArtemisWorldRef     world;
     CFArrayRef          actives;
     ArtemisAspectRef    aspect;
@@ -34,6 +34,122 @@ static bool ctor(void *ptr, va_list args)
     this->dummy = false;
 
     return true;
+}
+
+void ArtemisEntitySystemBegin(ArtemisEntitySystemRef this)
+{
+    (void*)this;
+}
+
+void ArtemisEntitySystemProcess(ArtemisEntitySystemRef this)
+{
+    (void*)this;
+}
+
+void ArtemisEntitySystemEnd(ArtemisEntitySystemRef this)
+{
+    (void*)this;
+}
+
+void ArtemisEntitySystemProcessEntities(ArtemisEntitySystemRef this, CFArrayRef entities)
+{
+    (void*)this;
+    (void*)entities;
+}
+
+bool ArtemisEntitySystemCheckProcessing(ArtemisEntitySystemRef this)
+{
+    (void*)this;
+    return false;
+}
+
+void ArtemisEntitySystemInitialize(ArtemisEntitySystemRef this)
+{
+    (void*)this;
+}
+
+void ArtemisEntitySystemInserted(ArtemisEntitySystemRef this, ArtemisEntityRef e)
+{
+    (void*)this;
+    (void*)e;
+}
+
+void ArtemisEntitySystemRemoved(ArtemisEntitySystemRef this, ArtemisEntityRef e)
+{
+    (void*)this;
+    (void*)e;
+}
+
+void ArtemisEntitySystemCheck(ArtemisEntitySystemRef this, ArtemisEntityRef e)
+{
+    (void*)this;
+    (void*)e;
+}
+
+void ArtemisEntitySystemRemoveFromSystem(ArtemisEntitySystemRef this, ArtemisEntityRef e)
+{
+    (void*)e;
+    (void*)this;
+}
+
+void ArtemisEntitySystemInsertToSystem(ArtemisEntitySystemRef this, ArtemisEntityRef e)
+{
+    (void*)this;
+    (void*)e;
+}
+
+void ArtemisEntitySystemAdded(ArtemisEntitySystemRef this, ArtemisEntityRef e)
+{
+    (void*)this;
+    (void*)e;
+}
+
+void ArtemisEntitySystemChanged(ArtemisEntitySystemRef this, ArtemisEntityRef e)
+{
+    (void*)this;
+    (void*)e;
+}
+
+void ArtemisEntitySystemDeleted(ArtemisEntitySystemRef this, ArtemisEntityRef e)
+{
+    (void*)this;
+    (void*)e;
+}
+
+void ArtemisEntitySystemDisabled(ArtemisEntitySystemRef this, ArtemisEntityRef e)
+{
+    (void*)this;
+    (void*)e;
+}
+
+void ArtemisEntitySystemEnabled(ArtemisEntitySystemRef this, ArtemisEntityRef e)
+{
+    (void*)this;
+    (void*)e;
+}
+
+void ArtemisEntitySystemSetWorld(ArtemisEntitySystemRef this, ArtemisWorldRef world)
+{
+    (void*)this;
+    (void*)world;
+}
+
+bool ArtemisEntitySystemIsPassive(ArtemisEntitySystemRef this)
+{
+    (void*)this;
+    return false;
+}
+
+void ArtemisEntitySystemSetPassive(ArtemisEntitySystemRef this, bool value)
+{
+    (void*)this;
+    (void)value;
+}
+
+CFArrayRef ArtemisEntitySystemGetActive(ArtemisEntitySystemRef this)
+{
+    (void*)this;
+    return NULL;
 }
 
 

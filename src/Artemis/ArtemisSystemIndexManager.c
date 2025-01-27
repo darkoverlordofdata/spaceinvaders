@@ -11,7 +11,7 @@ typedef struct ArtemisSystemIndexManagerClass {
 ArtemisSystemIndexManagerClass ArtemisSystemIndexManager = { .index = 0, .indices = NULL};
 
 
-int ArtemisSystemIndexManagerGetIndexFor(CFClassRef es) 
+ulong ArtemisSystemIndexManagerGetIndexFor(CFClassRef es) 
 {
     if (ArtemisSystemIndexManager.indices == NULL) {
         ArtemisSystemIndexManager.indices = CFCreate(CFMap, NULL);
@@ -22,5 +22,5 @@ int ArtemisSystemIndexManagerGetIndexFor(CFClassRef es)
         index = CFCreate(CFInt, ArtemisSystemIndexManager.index++);
         CFMapSet(ArtemisSystemIndexManager.indices, es, index);
     }
-    return (int)CFIntValue(index);
+    return (ulong)CFIntValue(index);
 }

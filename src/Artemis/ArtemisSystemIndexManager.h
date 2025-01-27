@@ -3,4 +3,4 @@
 /**
  *  @class ArtemisSystemIndexManager
  */
-int ArtemisSystemIndexManagerGetIndexFor(CFClassRef es);
+ulong ArtemisSystemIndexManagerGetIndexFor(CFClassRef es);

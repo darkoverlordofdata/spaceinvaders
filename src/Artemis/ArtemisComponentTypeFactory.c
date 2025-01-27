@@ -23,6 +23,26 @@ static bool ctor(void *ptr, va_list args)
     return true;
 }
 
+ArtemisComponentTypeRef ArtemisComponentTypeFactoryGetTypeFor(ArtemisComponentTypeFactoryRef this, CFClassRef cls)
+{
+    (void*)this;
+    (void*)cls;
+    return NULL;
+}
+
+ulong ArtemisComponentTypeFactoryGetIndexFor(ArtemisComponentTypeFactoryRef this, CFClassRef cls)
+{
+    (void*)this;
+    (void*)cls;
+    return 0;
+}
+
+ArtemisTaxonomy ArtemisComponentTypeFactoryGetTaxonomy(ArtemisComponentTypeFactoryRef this, ulong index)
+{
+    (void*)this;
+    (void)index;
+    return 0;
+}
 
 static struct __CFClass class = {
     .name = "ArtemisComponentTypeFactory",

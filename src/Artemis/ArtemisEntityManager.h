@@ -9,18 +9,17 @@ typedef struct __ArtemisEntityManager*  ArtemisEntityManagerRef;
 typedef struct __ArtemisWorld*          ArtemisWorldRef;
 typedef struct __ArtemisEntity*         ArtemisEntityRef;
 
-
 ArtemisEntityRef ArtemisEntityManagerCreateEntityInstance(ArtemisEntityManagerRef, CFStringRef);
 void ArtemisEntityManagerAdded(ArtemisEntityManagerRef, ArtemisEntityRef);
 void ArtemisEntityManagerEnabled(ArtemisEntityManagerRef, ArtemisEntityRef);
 void ArtemisEntityManagerDisabled(ArtemisEntityManagerRef, ArtemisEntityRef);
 void ArtemisEntityManagerDeleted(ArtemisEntityManagerRef, ArtemisEntityRef);
-bool ArtemisEntityManagerIsActive(ArtemisEntityManagerRef, int);
-bool ArtemisEntityManagerIsEnaled(ArtemisEntityManagerRef, int);
-ArtemisEntityRef ArtemisEntityManageGetEntity(ArtemisEntityManagerRef, int);
-int ArtemisEntityManageGetActiveEntityCount(ArtemisEntityManagerRef);
-int ArtemisEntityManageGetTotalCreated(ArtemisEntityManagerRef);
-int ArtemisEntityManageGetTotalDeleted(ArtemisEntityManagerRef);
+bool ArtemisEntityManagerIsActive(ArtemisEntityManagerRef, ulong);
+bool ArtemisEntityManagerIsEnaled(ArtemisEntityManagerRef, ulong);
+ArtemisEntityRef ArtemisEntityManageGetEntity(ArtemisEntityManagerRef, ulong);
+ulong ArtemisEntityManageGetActiveEntityCount(ArtemisEntityManagerRef);
+ulong ArtemisEntityManageGetTotalCreated(ArtemisEntityManagerRef);
+ulong ArtemisEntityManageGetTotalDeleted(ArtemisEntityManagerRef);
 
 
 

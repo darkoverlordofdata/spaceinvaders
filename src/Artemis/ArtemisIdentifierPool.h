@@ -7,5 +7,5 @@ extern CFClassRef ArtemisIdentifierPool;
 
 typedef struct __ArtemisIdentifierPool* ArtemisIdentifierPoolRef;
 
-int ArtemisIdentifierPoolCheckOut(ArtemisIdentifierPoolRef);
-void ArtemisIdentifierPoolCheckIn(ArtemisIdentifierPoolRef, int);
+ulong ArtemisIdentifierPoolCheckOut(ArtemisIdentifierPoolRef);
+void ArtemisIdentifierPoolCheckIn(ArtemisIdentifierPoolRef, ulong);
