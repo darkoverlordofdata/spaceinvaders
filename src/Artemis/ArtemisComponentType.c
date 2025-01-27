@@ -40,8 +40,8 @@ ArtemisTaxonomy ArtemisComponentTypeGetTaxonomy(ArtemisComponentTypeRef this)
 }
 
 static struct __CFClass class = {
-	.name = "ArtemisComponentType",
-	.size = sizeof(struct __ArtemisComponentType),
-	.ctor = ctor,
+    .name = "ArtemisComponentType",
+    .size = sizeof(struct __ArtemisComponentType),
+    .ctor = ctor,
 };
 CFClassRef ArtemisComponentType = &class;

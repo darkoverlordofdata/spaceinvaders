@@ -23,7 +23,7 @@ struct __ArtemisEntitySystem {
 
 static bool ctor(void *ptr, va_list args)
 {
-    ArtemisEntitySystemRef this = ptr; 	
+    ArtemisEntitySystemRef this = ptr;     
 
     this->actives = CFCreate(CFArray, NULL);
     this->aspect = va_arg(args, ArtemisAspectRef);
@@ -38,8 +38,8 @@ static bool ctor(void *ptr, va_list args)
 
 
 static struct __CFClass class = {
-	.name = "ArtemisEntitySystem",
-	.size = sizeof(struct __ArtemisEntitySystem),
-	.ctor = ctor,
+    .name = "ArtemisEntitySystem",
+    .size = sizeof(struct __ArtemisEntitySystem),
+    .ctor = ctor,
 };
 CFClassRef ArtemisEntitySystem = &class;

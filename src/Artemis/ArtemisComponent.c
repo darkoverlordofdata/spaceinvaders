@@ -12,15 +12,15 @@ struct __ArtemisComponent {
 static bool ctor(void *ptr, va_list args)
 {
     (void*)args;
-	ArtemisComponentRef this = ptr;
+    ArtemisComponentRef this = ptr;
 
-	return true;
+    return true;
 }
 
 
 static struct __CFClass class = {
-	.name = "ArtemisComponent",
-	.size = sizeof(struct __ArtemisComponent),
-	.ctor = ctor,
+    .name = "ArtemisComponent",
+    .size = sizeof(struct __ArtemisComponent),
+    .ctor = ctor,
 };
 CFClassRef ArtemisComponent = &class;

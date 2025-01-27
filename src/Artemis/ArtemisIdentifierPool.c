@@ -17,7 +17,7 @@ static bool ctor(void *ptr, va_list args)
 {
     (void*)args;
 
-    ArtemisIdentifierPoolRef this = ptr; 	
+    ArtemisIdentifierPoolRef this = ptr;     
     this->ids = CFCreate(CFArray, NULL);
 
     return true;
@@ -25,8 +25,8 @@ static bool ctor(void *ptr, va_list args)
 
 
 static struct __CFClass class = {
-	.name = "ArtemisIdentifierPool",
-	.size = sizeof(struct __ArtemisIdentifierPool),
-	.ctor = ctor,
+    .name = "ArtemisIdentifierPool",
+    .size = sizeof(struct __ArtemisIdentifierPool),
+    .ctor = ctor,
 };
 CFClassRef ArtemisIdentifierPool = &class;

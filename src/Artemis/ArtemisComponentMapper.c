@@ -80,8 +80,8 @@ ArtemisComponentMapperRef ArtemisComponentMapperGetFor(CFClassRef cls, ArtemisWo
 }
 
 static struct __CFClass class = {
-	.name = "ArtemisComponentMapper",
-	.size = sizeof(struct __ArtemisComponentMapper),
-	.ctor = ctor,
+    .name = "ArtemisComponentMapper",
+    .size = sizeof(struct __ArtemisComponentMapper),
+    .ctor = ctor,
 };
 CFClassRef ArtemisComponentMapper = &class;

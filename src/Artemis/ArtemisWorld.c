@@ -40,8 +40,8 @@ static bool ctor(void *ptr, va_list args)
 
 
 static struct __CFClass class = {
-	.name = "ArtemisWorld",
-	.size = sizeof(struct __ArtemisWorld),
-	.ctor = ctor,
+    .name = "ArtemisWorld",
+    .size = sizeof(struct __ArtemisWorld),
+    .ctor = ctor,
 };
 CFClassRef ArtemisWorld = &class;

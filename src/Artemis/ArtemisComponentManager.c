@@ -14,13 +14,13 @@ struct __ArtemisComponentManager {
 static bool ctor(void *ptr, va_list args)
 {
     (void*)args;
-	ArtemisComponentManagerRef this = ptr;
+    ArtemisComponentManagerRef this = ptr;
     this->componentsByType = CFCreate(CFArray, NULL);
     this->pooledComponents = CFCreate(ArtemisComponentPool);
     this->deleted = CFCreate(CFArray, NULL);
     this->typeFactory = CFCreate(ArtemisComponentTypeFactory);
 
-	return true;
+    return true;
 }
 
 CFObjectRef ArtemisComponentManagerCreate(ArtemisComponentManagerRef this, ArtemisEntityRef owner, CFClassRef componentClass)
@@ -88,11 +88,11 @@ void ArtemisComponentManagerRemoveComponentsOfEntity(ArtemisComponentManagerRef 
  * </p>
  *
  * @param e
- *			the entity to add to
+ *            the entity to add to
  * @param type
- *			the type of component being added
+ *            the type of component being added
  * @param component
- *			the component to add
+ *            the component to add
  */
 void ArtemisComponentManagerAddComponent(ArtemisComponentManagerRef this, ArtemisEntityRef e, ArtemisComponentTypeRef type, CFObjectRef component)
 {
@@ -109,9 +109,9 @@ void ArtemisComponentManagerAddComponent(ArtemisComponentManagerRef this, Artemi
  * Removes the component of given type from the entity.
  *
  * @param e
- *			the entity to remove from
+ *            the entity to remove from
  * @param type
- *			the type of component being removed
+ *            the type of component being removed
  */
 void ArtemisComponentManagerRemoveComponent(ArtemisComponentManagerRef this, ArtemisEntityRef e, ArtemisComponentTypeRef type)
 {
@@ -137,7 +137,7 @@ void ArtemisComponentManagerRemoveComponent(ArtemisComponentManagerRef this, Art
  * Get all components from all entities for a given type.
  *
  * @param type
- *			the type of components to get
+ *            the type of components to get
  * @return a bag containing all components of the given type
  */
 CFArrayRef ArtemisComponentManagerGetComponentsByType(ArtemisComponentManagerRef this, ArtemisComponentTypeRef type)
@@ -154,9 +154,9 @@ CFArrayRef ArtemisComponentManagerGetComponentsByType(ArtemisComponentManagerRef
  * Get a component of an entity.
  *
  * @param e
- *			the entity associated with the component
+ *            the entity associated with the component
  * @param type
- *			the type of component to get
+ *            the type of component to get
  * @return the component of given type
  */
 CFObjectRef ArtemisComponentManagerGetComponent(ArtemisComponentManagerRef this, ArtemisEntityRef e, ArtemisComponentTypeRef type)
@@ -172,9 +172,9 @@ CFObjectRef ArtemisComponentManagerGetComponent(ArtemisComponentManagerRef this,
  * Get all component associated with an entity.
  *
  * @param e
- *			the entity to get components from
+ *            the entity to get components from
  * @param fillBag
- *			a bag to be filled with components
+ *            a bag to be filled with components
  * @return the {@code fillBag}, filled with the entities components
  */
 CFArrayRef ArtemisComponentManagerGetComponentsFor(ArtemisComponentManagerRef this, ArtemisEntityRef e, CFArrayRef fillBag){
@@ -202,8 +202,8 @@ void ArtemisComponentManagerClean(ArtemisComponentManagerRef this)
 }
 
 static struct __CFClass class = {
-	.name = "ArtemisComponentManager",
-	.size = sizeof(struct __ArtemisComponentManager),
-	.ctor = ctor,
+    .name = "ArtemisComponentManager",
+    .size = sizeof(struct __ArtemisComponentManager),
+    .ctor = ctor,
 };
 CFClassRef ArtemisComponentManager = &class;

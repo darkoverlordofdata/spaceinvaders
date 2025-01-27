@@ -22,11 +22,11 @@
  *
  */
 struct __ArtemisAspect {
-	struct __CFObject obj;
-	CFBitVectorRef  allSet;
-	CFBitVectorRef  exclusionSet;
-	CFBitVectorRef  oneSet;
-	ArtemisWorldRef world;
+    struct __CFObject obj;
+    CFBitVectorRef  allSet;
+    CFBitVectorRef  exclusionSet;
+    CFBitVectorRef  oneSet;
+    ArtemisWorldRef world;
 };
 
 /**
@@ -35,14 +35,14 @@ struct __ArtemisAspect {
  */
 static bool ctor(void *ptr, va_list args)
 {
-	ArtemisAspectRef this = ptr;
+    ArtemisAspectRef this = ptr;
 
-	this->world = va_arg(args, ArtemisWorldRef);
-	this->allSet = CFCreate(CFBitVector);
-	this->exclusionSet = CFCreate(CFBitVector);
-	this->oneSet = CFCreate(CFBitVector);
+    this->world = va_arg(args, ArtemisWorldRef);
+    this->allSet = CFCreate(CFBitVector);
+    this->exclusionSet = CFCreate(CFBitVector);
+    this->oneSet = CFCreate(CFBitVector);
 
-	return true;
+    return true;
 }
 /**
  *
@@ -50,28 +50,28 @@ static bool ctor(void *ptr, va_list args)
  */
 void ArtemisAspectSetWorld(ArtemisAspectRef this, ArtemisWorldRef world)
 {
-	this->world = world;
+    this->world = world;
 }
 
 CFBitVectorRef ArtemisAspectGetAllSet(ArtemisAspectRef this)
 {
-	return this->allSet;
+    return this->allSet;
 }
 
 CFBitVectorRef ArtemisAspectGetExclusionSet(ArtemisAspectRef this)
 {
-	return this->exclusionSet;
+    return this->exclusionSet;
 }
 
 CFBitVectorRef ArtemisAspectGetOneSet(ArtemisAspectRef this)
 {
-	return this->oneSet;
+    return this->oneSet;
 }
 
 ulong ArtemisAspectGetIndexFor(ArtemisAspectRef this, CFClassRef cls)
 {
-	(void*)this;
-	return ArtemisComponentTypeFactoryGetIndexFor(ArtemisAspectTypeFactory, cls);
+    (void*)this;
+    return ArtemisComponentTypeFactoryGetIndexFor(ArtemisAspectTypeFactory, cls);
 }
 
 /**
@@ -82,14 +82,14 @@ ulong ArtemisAspectGetIndexFor(ArtemisAspectRef this, CFClassRef cls)
 */
 ArtemisAspectRef ArtemisAspectAll(ArtemisAspectRef this, ...)
 {
-	va_list args;
-	va_start(args, this);
-	CFClassRef cls;
-	while ((cls = va_arg(args, CFClassRef)) != NULL) {
-		CFBitVectorSetBitAtIndex(this->allSet, ArtemisAspectGetIndexFor(this, cls), true);
-	}
-	va_end(args);
-	return this;
+    va_list args;
+    va_start(args, this);
+    CFClassRef cls;
+    while ((cls = va_arg(args, CFClassRef)) != NULL) {
+        CFBitVectorSetBitAtIndex(this->allSet, ArtemisAspectGetIndexFor(this, cls), true);
+    }
+    va_end(args);
+    return this;
 }
 
 /**
@@ -102,14 +102,14 @@ ArtemisAspectRef ArtemisAspectAll(ArtemisAspectRef this, ...)
  */
 ArtemisAspectRef ArtemisAspectExclude(ArtemisAspectRef this, ...)
 {
-	va_list args;
-	va_start(args, this);
-	CFClassRef cls;
-	while ((cls = va_arg(args, CFClassRef)) != NULL) {
-		CFBitVectorSetBitAtIndex(this->exclusionSet, ArtemisAspectGetIndexFor(this, cls), true);
-	}
-	va_end(args);
-	return this;
+    va_list args;
+    va_start(args, this);
+    CFClassRef cls;
+    while ((cls = va_arg(args, CFClassRef)) != NULL) {
+        CFBitVectorSetBitAtIndex(this->exclusionSet, ArtemisAspectGetIndexFor(this, cls), true);
+    }
+    va_end(args);
+    return this;
 }
 
 /**
@@ -120,21 +120,21 @@ ArtemisAspectRef ArtemisAspectExclude(ArtemisAspectRef this, ...)
  */
 ArtemisAspectRef ArtemisAspectOne(ArtemisAspectRef this, ...)
 {
-	va_list args;
-	va_start(args, this);
-	CFClassRef cls;
-	while ((cls = va_arg(args, CFClassRef)) != NULL) {
-		CFBitVectorSetBitAtIndex(this->oneSet, ArtemisAspectGetIndexFor(this, cls), true);
-	}
-	va_end(args);
-	return this;
+    va_list args;
+    va_start(args, this);
+    CFClassRef cls;
+    while ((cls = va_arg(args, CFClassRef)) != NULL) {
+        CFBitVectorSetBitAtIndex(this->oneSet, ArtemisAspectGetIndexFor(this, cls), true);
+    }
+    va_end(args);
+    return this;
 }
 
 
 
 static struct __CFClass class = {
-	.name = "ArtemisAspect",
-	.size = sizeof(struct __ArtemisAspect),
-	.ctor = ctor,
+    .name = "ArtemisAspect",
+    .size = sizeof(struct __ArtemisAspect),
+    .ctor = ctor,
 };
 CFClassRef ArtemisAspect = &class;
