@@ -71,6 +71,14 @@ copy(void *ptr)
 	return CFRef(ptr);
 }
 
+CFBoolRef CFBoolNew(int value) {
+	return CFNew(CFBool, value);
+}
+
+CFBoolRef CFBoolCreate(int value) {
+	return CFCreate(CFBool, value);
+}
+
 bool
 CFBoolValue(CFBoolRef boolean)
 {

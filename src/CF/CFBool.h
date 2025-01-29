@@ -29,4 +29,5 @@
 typedef struct __CFBool* CFBoolRef;
 extern CFClassRef CFBool;
 extern bool CFBoolValue(CFBoolRef);
-
+extern CFBoolRef CFBoolNew(int value);
+extern CFBoolRef CFBoolCreate(int value);

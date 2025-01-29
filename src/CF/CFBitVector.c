@@ -156,6 +156,16 @@ CFBitVectorGetBitAtIndex(CFBitVectorRef this, size_t index)
 	 	return false;
 }
 
+void     
+CFBitVectorSetAllBits(CFBitVectorRef this, bool value)
+{
+	char v = value ? 0:(char)0xff;
+
+	for (size_t i = 0; i < this->length; i++)
+		this->data[i] = v;
+
+}
+
 static struct __CFClass class = {
 	.name = "CFBitVector",
 	.size = sizeof(struct __CFBitVector),

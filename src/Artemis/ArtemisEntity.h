@@ -27,10 +27,10 @@ CFObjectRef ArtemisEntityGetComponent(ArtemisEntityRef, ArtemisComponentTypeRef)
 CFObjectRef ArtemisEntityGetComponentByType(ArtemisEntityRef, CFClassRef);
 CFArrayRef ArtemisEntityGetComponents(ArtemisEntityRef, CFArrayRef);
 void ArtemisEntityAddToWorld(ArtemisEntityRef);
+void ArtemisEntityChangeInWorld(ArtemisEntityRef);
 void ArtemisEntityDeleteFromWorld(ArtemisEntityRef);
 void ArtemisEntityEnable(ArtemisEntityRef);
 void ArtemisEntityDisable(ArtemisEntityRef);
 CFStringRef ArtemisEntityGetUUID(ArtemisEntityRef);
 ArtemisWorldRef ArtemisEntityGetWorld(ArtemisEntityRef);
-
-
+CFStringRef ArtemisWorldRandomUUID();

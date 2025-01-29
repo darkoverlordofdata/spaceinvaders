@@ -23,76 +23,38 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
+#pragma once
+#include "CFClass.h"
 #include "CFObject.h"
-#include "CFDouble.h"
+#include "CFString.h"
 
-struct __CFDouble {
-	struct __CFObject obj;
-	double value;
-};
+typedef struct __CFUUID* CFUUIDRef;
+
+typedef struct CFUUIDBytes {
+    uint8_t byte0;
+    uint8_t byte1;
+    uint8_t byte2;
+    uint8_t byte3;
+    uint8_t byte4;
+    uint8_t byte5;
+    uint8_t byte6;
+    uint8_t byte7;
+    uint8_t byte8;
+    uint8_t byte9;
+    uint8_t byte10;
+    uint8_t byte11;
+    uint8_t byte12;
+    uint8_t byte13;
+    uint8_t byte14;
+    uint8_t byte15;
+} CFUUIDBytes;
 
 
-static bool
-ctor(void *ptr, va_list args)
-{
-	CFDoubleRef double_ = ptr;
+extern CFClassRef CFUUID;
+extern void CFUUIDInit(CFUUIDRef this);
+extern CFUUIDRef CFUUIDNew();
+extern CFUUIDRef CFUUIDCreate();
+extern CFUUIDBytes CFUUIDValue(CFUUIDRef);
+extern CFStringRef CFUUIDToString(CFUUIDRef);
 
-	double_->value = va_arg(args, double);
 
-	return true;
-}
-
-static bool
-equal(void *ptr1, void *ptr2)
-{
-	CFObjectRef obj2 = ptr2;
-	CFDoubleRef double1, double2;
-
-	if (obj2->cls != CFDouble)
-		return false;
-
-	double1 = ptr1;
-	double2 = ptr2;
-
-	return (double1->value == double2->value);
-}
-
-static uint32_t
-hash(void *ptr)
-{
-	CFDoubleRef double_ = ptr;
-
-	/* FIXME: Create a proper hash! */
-	return (uint32_t)double_->value;
-}
-
-static void*
-copy(void *ptr)
-{
-	return CFRef(ptr);
-}
-
-double
-CFDoubleValue(CFDoubleRef double_)
-{
-	return double_->value;
-}
-
-CFDoubleRef CFDoubleNew(double value) {
-	return CFNew(CFDouble, value);
-}
-
-CFDoubleRef CFDoubleCreate(double value) {
-	return CFCreate(CFDouble, value);
-}
-
-static struct __CFClass class = {
-	.name = "CFDouble",
-	.size = sizeof(struct __CFDouble),
-	.ctor = ctor,
-	.equal = equal,
-	.hash = hash,
-	.copy = copy
-};
-CFClassRef CFDouble = &class;

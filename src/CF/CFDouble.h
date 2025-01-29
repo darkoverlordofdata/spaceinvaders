@@ -29,4 +29,7 @@
 typedef struct __CFDouble* CFDoubleRef;
 extern CFClassRef CFDouble;
 extern double CFDoubleValue(CFDoubleRef);
+extern CFDoubleRef CFDoubleNew(double value);
+extern CFDoubleRef CFDoubleCreate(double value);
+
 

@@ -47,4 +47,3 @@ extern bool     CFStringHasSuffix(CFStringRef, CFStringRef);
 extern bool     CFStringHasSuffixC(CFStringRef, const char*);
 extern size_t   CFStringFind(CFStringRef, CFStringRef, CFRange);
 extern size_t   CFStringFindC(CFStringRef, const char*, CFRange);
-

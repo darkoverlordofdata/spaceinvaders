@@ -28,6 +28,7 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "CFClass.h"
 #include "CFObject.h"
 #include "CFString.h"
 #include "CFHash.h"

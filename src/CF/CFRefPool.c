@@ -103,6 +103,10 @@ CFRefPoolAdd(void *ptr)
 	return true;
 }
 
+CFRefPoolRef CFRefPoolNew() {
+	return CFNew(CFRefPool);
+}
+
 static struct __CFClass class = {
 	.name = "CFRefPool",
 	.size = sizeof(struct __CFRefPool),

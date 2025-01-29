@@ -29,4 +29,5 @@
 typedef struct __CFInt* CFIntRef;
 extern CFClassRef CFInt;
 extern intmax_t CFIntValue(CFIntRef);
-
+extern CFIntRef CFIntNew(int64_t value);
+extern CFIntRef CFIntCreate(int64_t value);

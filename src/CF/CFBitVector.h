@@ -33,4 +33,4 @@ extern CFClassRef CFBitVector;
 extern size_t   CFBitVectorGetCount(CFBitVectorRef);
 extern bool     CFBitVectorGetBitAtIndex(CFBitVectorRef, size_t);
 extern void     CFBitVectorSetBitAtIndex(CFBitVectorRef, size_t, bool);
-
+extern void     CFBitVectorSetAllBits(CFBitVectorRef, bool);

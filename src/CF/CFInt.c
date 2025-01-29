@@ -77,6 +77,15 @@ CFIntValue(CFIntRef integer)
 	return integer->value;
 }
 
+CFIntRef CFIntNew(int64_t value) {
+	return CFNew(CFInt, value);
+}
+
+CFIntRef CFIntCreate(int64_t value) {
+	return CFCreate(CFInt, value);
+}
+
+
 static struct __CFClass class = {
 	.name = "CFInt",
 	.size = sizeof(struct __CFInt),
