@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, Jonathan Schleifer <js@webkeks.org>
+ * Copyright (c) 2025, darkoverlordofdata@gmail.com
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

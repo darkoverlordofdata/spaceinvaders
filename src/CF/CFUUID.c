@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, Jonathan Schleifer <js@webkeks.org>
+ * Copyright (c) 2025, darkoverlordofdata@gmail.com
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,21 +33,21 @@
 #include "CFUUID.h"
 
 struct __CFUUID {
-	struct __CFObject obj;
-	CFUUIDBytes value;
+    struct __CFObject obj;
+    CFUUIDBytes value;
 };
 
 /**
  * get a random version 4 uuid
  * xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
  *
- */			
+ */            
 static bool
 ctor(void *ptr, va_list args)
 {
     (void*)args;
     
-	CFUUIDRef this = ptr;
+    CFUUIDRef this = ptr;
 
     // get 16 random bytes
     int d0 = rand();
@@ -76,20 +76,20 @@ ctor(void *ptr, va_list args)
     this->value.byte14 = d3>>16&0xff;
     this->value.byte15 = d3>>24&0xff;
 
-	return true;
+    return true;
 }
 
 static bool
 equal(void *ptr1, void *ptr2)
 {
-	CFObjectRef obj2 = ptr2;
-	if (obj2->cls != CFUUID)
-		return false;
+    CFObjectRef obj2 = ptr2;
+    if (obj2->cls != CFUUID)
+        return false;
 
-	CFUUIDRef this = ptr1;
-	CFUUIDRef that = ptr2;
+    CFUUIDRef this = ptr1;
+    CFUUIDRef that = ptr2;
 
-	return (
+    return (
           this->value.byte0 == that->value.byte0
         & this->value.byte1 == that->value.byte1
         & this->value.byte2 == that->value.byte2
@@ -113,13 +113,13 @@ static uint32_t
 hash(void *ptr)
 {
     size_t this = (size_t)ptr;
-	return (uint32_t)this;
+    return (uint32_t)this;
 }
 
 static void*
 copy(void *ptr)
 {
-	return CFRef(ptr);
+    return CFRef(ptr);
 }
 
 static CFStringRef 
@@ -179,21 +179,21 @@ CFStringRef CFUUIDToString(CFUUIDRef this)
 
 
 CFUUIDRef CFUUIDNew() {
-	CFUUIDRef this = CFNew(CFUUID);
+    CFUUIDRef this = CFNew(CFUUID);
     return this;
 }
 
 CFUUIDRef CFUUIDCreate() {
-	CFUUIDRef this = CFCreate(CFUUID);
+    CFUUIDRef this = CFCreate(CFUUID);
     return this;
 }
 
 static struct __CFClass class = {
-	.name = "CFUUID",
-	.size = sizeof(struct __CFUUID),
-	.ctor = ctor,
-	.equal = equal,
-	.hash = hash,
-	.copy = copy
+    .name = "CFUUID",
+    .size = sizeof(struct __CFUUID),
+    .ctor = ctor,
+    .equal = equal,
+    .hash = hash,
+    .copy = copy
 };
 CFClassRef CFUUID = &class;
