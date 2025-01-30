@@ -274,43 +274,6 @@ ArtemisWorldRef ArtemisEntityGetWorld(ArtemisEntityRef this)
     return this->world;
 }
 
-/**
- * get a random uuid
- * xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
- *
- * @see https://github.com/torvalds/linux/blob/master/lib/uuid.c
- */			
-CFStringRef ArtemisWorldRandomUUID() {
-
-    int d0 = rand();
-    int d1 = rand();
-    int d2 = rand();
-    int d3 = rand();
-
-    unsigned char result[17] = {
-        d0&0xff,
-        d0>>8&0xff,
-        d0>>16&0xff,
-        d0>>24&0xff,
-        d1&0xff,
-        d1>>8&0xff,
-        (d1>>16&0x0f)|0x40,     /* Set GUID version to 4 --- truly random generation */
-        d1>>24&0xff,
-        (d2&0x3f)|0x80,         /* Set the GUID variant to DCE */
-        d2>>8&0xff,
-        d2>>16&0xff,
-        d2>>24&0xff,
-        d3&0xff,
-        d3>>8&0xff,
-        d3>>16&0xff,
-        d3>>24&0xff,
-        0
-    };
-
-    return CFCreate(CFString, result);
- 
-
-}
 
 static struct __CFClass class = {
     .name = "ArtemisEntity",

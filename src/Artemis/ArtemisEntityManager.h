@@ -19,6 +19,7 @@ bool ArtemisEntityManagerIsEnaled(ArtemisEntityManagerRef, ulong);
 ArtemisEntityRef ArtemisEntityManageGetEntity(ArtemisEntityManagerRef, ulong);
 ulong ArtemisEntityManageGetActiveEntityCount(ArtemisEntityManagerRef);
 ulong ArtemisEntityManageGetTotalCreated(ArtemisEntityManagerRef);
+ulong ArtemisEntityManageGetTotalAdded(ArtemisEntityManagerRef);
 ulong ArtemisEntityManageGetTotalDeleted(ArtemisEntityManagerRef);
 
 
