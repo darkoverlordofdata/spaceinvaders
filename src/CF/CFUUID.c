@@ -145,31 +145,31 @@ toString(void *ptr)
     };
 
     CFUUIDRef this = ptr;
-    char s[37];
+    char r[37];
 
-    memcpy(&s[0],  hex[this->value.byte0], 2);
-    memcpy(&s[2],  hex[this->value.byte1], 2);
-    memcpy(&s[4],  hex[this->value.byte2], 2);
-    memcpy(&s[6],  hex[this->value.byte3], 2);
-    s[8] = '-';
-    memcpy(&s[9],  hex[this->value.byte4], 2);
-    memcpy(&s[11], hex[this->value.byte5], 2);
-    s[13] = '-';
-    memcpy(&s[14], hex[this->value.byte6], 2);
-    memcpy(&s[16], hex[this->value.byte7], 2);
-    s[18] = '-';
-    memcpy(&s[19], hex[this->value.byte8], 2);
-    memcpy(&s[21], hex[this->value.byte9], 2);
-    s[23] = '-';
-    memcpy(&s[24], hex[this->value.byte10], 2);
-    memcpy(&s[26], hex[this->value.byte11], 2);
-    memcpy(&s[28], hex[this->value.byte12], 2);
-    memcpy(&s[30], hex[this->value.byte13], 2);
-    memcpy(&s[32], hex[this->value.byte14], 2);
-    memcpy(&s[34], hex[this->value.byte15], 2);
-    s[36] = 0;
+    memcpy(&r[0],  hex[this->value.byte0], 2);
+    memcpy(&r[2],  hex[this->value.byte1], 2);
+    memcpy(&r[4],  hex[this->value.byte2], 2);
+    memcpy(&r[6],  hex[this->value.byte3], 2);
+    r[8] = '-';
+    memcpy(&r[9],  hex[this->value.byte4], 2);
+    memcpy(&r[11], hex[this->value.byte5], 2);
+    r[13] = '-';
+    memcpy(&r[14], hex[this->value.byte6], 2);
+    memcpy(&r[16], hex[this->value.byte7], 2);
+    r[18] = '-';
+    memcpy(&r[19], hex[this->value.byte8], 2);
+    memcpy(&r[21], hex[this->value.byte9], 2);
+    r[23] = '-';
+    memcpy(&r[24], hex[this->value.byte10], 2);
+    memcpy(&r[26], hex[this->value.byte11], 2);
+    memcpy(&r[28], hex[this->value.byte12], 2);
+    memcpy(&r[30], hex[this->value.byte13], 2);
+    memcpy(&r[32], hex[this->value.byte14], 2);
+    memcpy(&r[34], hex[this->value.byte15], 2);
+    r[36] = 0;
 
-    return CFCreate(CFString, s);
+    return CFCreate(CFString, r);
 }
 
 CFStringRef CFUUIDToString(CFUUIDRef this)
@@ -194,6 +194,7 @@ static struct __CFClass class = {
     .ctor = ctor,
     .equal = equal,
     .hash = hash,
-    .copy = copy
+    .copy = copy,
+    .toString = toString
 };
 CFClassRef CFUUID = &class;

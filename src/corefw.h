@@ -18,6 +18,7 @@
 #include "CF/CFRefPool.h"   // IWYU pragma: keep
 #include "CF/CFString.h"    // IWYU pragma: keep
 #include "CF/CFBitVector.h" // IWYU pragma: keep    
+#include "CF/CFUUID.h"      // IWYU pragma: keep
 // #include "CF/CFLog.h"       // IWYU pragma: keep
 
 typedef uint8_t UInt8;

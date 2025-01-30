@@ -21,3 +21,4 @@ CFObjectRef ArtemisComponentManagerGetComponent(ArtemisComponentManagerRef, Arte
 CFArrayRef ArtemisComponentManagerGetComponentsFor(ArtemisComponentManagerRef, ArtemisEntityRef, CFArrayRef);
 void ArtemisComponentManagerDeleted(ArtemisComponentManagerRef, ArtemisEntityRef);
 void ArtemisComponentManagerClean(ArtemisComponentManagerRef);
+ArtemisComponentTypeFactoryRef ArtemisComponentManagerGetTypeFactory(ArtemisComponentManagerRef);

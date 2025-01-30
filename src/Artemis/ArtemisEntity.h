@@ -17,7 +17,7 @@ CFBitVectorRef ArtemisEntityGetSystemBits(ArtemisEntityRef);
 void ArtemisEntityReset(ArtemisEntityRef);
 CFObjectRef ArtemisEntityCreateComponent(ArtemisEntityRef, CFClassRef, ...);
 ArtemisEntityRef ArtemisEntityAddComponent(ArtemisEntityRef, CFObjectRef, ...);
-ArtemisComponentTypeRef ArtemisEntityGetTypeFor(ArtemisEntityRef, CFObjectRef);
+ArtemisComponentTypeRef ArtemisEntityGetTypeFor(ArtemisEntityRef, CFClassRef);
 ArtemisEntityRef ArtemisEntityRemoveComponentInstance(ArtemisEntityRef, CFObjectRef);
 ArtemisEntityRef ArtemisEntityRemoveComponent(ArtemisEntityRef, ArtemisComponentTypeRef);
 ArtemisEntityRef ArtemisEntityRemoveComponentByType(ArtemisEntityRef, CFClassRef);

@@ -1,4 +1,8 @@
 #include "../artemis.h"
+#include "ArtemisComponentManager.h"
+#include "ArtemisComponentType.h"
+#include "ArtemisComponentTypeFactory.h"
+#include "ArtemisWorld.h"
 #include <stdlib.h>
 /**
  * The entity class. Cannot be instantiated outside the framework, you must
@@ -9,14 +13,14 @@
  */
 struct __ArtemisEntity {
     struct __CFObject           obj;
-    CFStringRef                 uuid;
+    CFUUIDRef                   uuid;
     CFStringRef                 name;
     ulong                       id;
     CFBitVectorRef              componentBits;
     CFBitVectorRef              systemBits;
     ArtemisWorldRef             world;
     ArtemisEntityManagerRef     entityManager;
-    ArtemisComponentManagerRef  componenetManager;
+    ArtemisComponentManagerRef  componentManager;
 };
 
 static bool ctor(void *ptr, va_list args)
@@ -26,7 +30,7 @@ static bool ctor(void *ptr, va_list args)
     this->id = va_arg(args, ulong);
     this->name = CFCreate(CFString, va_arg(args, char*));
     this->entityManager = ArtemisWorldGetEntityManager(this->world);
-    this->componenetManager = ArtemisWorldGetComponentManager(this->world);
+    this->componentManager = ArtemisWorldGetComponentManager(this->world);
     this->systemBits = CFCreate(CFBitVector, NULL);
     this->componentBits = CFCreate(CFBitVector, NULL);
 
@@ -71,14 +75,18 @@ void ArtemisEntityReset(ArtemisEntityRef this)
 {
     CFBitVectorSetAllBits(this->systemBits, false);
     CFBitVectorSetAllBits(this->componentBits, false);
-    this->uuid = ArtemisWorldRandomUUID();
+    this->uuid = CFUUIDCreate();
 }
 
 CFObjectRef ArtemisEntityCreateComponent(ArtemisEntityRef this, CFClassRef cls, ...)
 {
-    (void*)this;
-    (void*)cls;
-    return NULL;
+    ArtemisComponentManagerRef componentManager = ArtemisWorldGetComponentManager(this->world);
+    CFObjectRef component = ArtemisComponentManagerCreate(componentManager, this, cls);
+    // need a way to pass ... to component
+    ArtemisComponentTypeFactoryRef tf = ArtemisComponentManagerGetTypeFactory(componentManager);
+    ArtemisComponentTypeRef componentType = ArtemisComponentTypeFactoryGetTypeFor(tf, cls);
+    CFBitVectorSetBitAtIndex(this->componentBits, ArtemisComponentTypeGetIndex(componentType), true);
+    return component;
 }
 
 /**
@@ -92,23 +100,22 @@ CFObjectRef ArtemisEntityCreateComponent(ArtemisEntityRef this, CFClassRef cls, 
  */
 ArtemisEntityRef ArtemisEntityAddComponent(ArtemisEntityRef this, CFObjectRef component, ...)
 {
-    (void*)this;
-    (void*)component;
-    return NULL;
+    ArtemisComponentTypeRef type = ArtemisEntityGetTypeFor(this, component->cls);
+    ArtemisComponentManagerAddComponent(this->componentManager, this, type, component);
+    return this;
 }
 
-ArtemisComponentTypeRef ArtemisEntityGetTypeFor(ArtemisEntityRef this, CFObjectRef component)
+ArtemisComponentTypeRef ArtemisEntityGetTypeFor(ArtemisEntityRef this, CFClassRef cls)
 {
-    (void*)this;
-    (void*)component;
-    return NULL;
+    ArtemisComponentManagerRef cm = ArtemisWorldGetComponentManager(this->world);
+    ArtemisComponentTypeFactoryRef tf = ArtemisComponentManagerGetTypeFactory(cm);
+    return ArtemisComponentTypeFactoryGetTypeFor(tf, cls);
 }
 
 ArtemisEntityRef ArtemisEntityRemoveComponentInstance(ArtemisEntityRef this, CFObjectRef component)
 {
-    (void*)this;
-    (void*)component;
-    return NULL;
+    ArtemisEntityRemoveComponent(this, ArtemisEntityGetTypeFor(this, component->cls));
+    return this;
 }
 
 /**
@@ -118,11 +125,10 @@ ArtemisEntityRef ArtemisEntityRemoveComponentInstance(ArtemisEntityRef this, CFO
  * 
  * @return this entity for chaining.
  */
-ArtemisEntityRef ArtemisEntityRemoveComponent(ArtemisEntityRef this, ArtemisComponentTypeRef component)
+ArtemisEntityRef ArtemisEntityRemoveComponent(ArtemisEntityRef this, ArtemisComponentTypeRef type)
 {
-    (void*)this;
-    (void*)component;
-    return NULL;
+    ArtemisComponentManagerRemoveComponent(this->componentManager, this, type);
+    return this;
 }
 
 /**
@@ -133,9 +139,8 @@ ArtemisEntityRef ArtemisEntityRemoveComponent(ArtemisEntityRef this, ArtemisComp
  */
 ArtemisEntityRef ArtemisEntityRemoveComponentByType(ArtemisEntityRef this, CFClassRef cls)
 {
-    (void*)this;
-    (void*)cls;
-    return NULL;
+    ArtemisEntityRemoveComponent(this, ArtemisEntityGetTypeFor(this, cls));
+    return this;
 }
 
 /**
@@ -146,8 +151,7 @@ ArtemisEntityRef ArtemisEntityRemoveComponentByType(ArtemisEntityRef this, CFCla
  */
 bool ArtemisEntityIsActive(ArtemisEntityRef this)
 {
-    (void*)this;
-    return NULL;
+    return ArtemisEntityManagerIsActive(this->entityManager, this->id);
 }
 
 /**
@@ -159,8 +163,7 @@ bool ArtemisEntityIsActive(ArtemisEntityRef this)
  */
 bool ArtemisEntityIsEnabled(ArtemisEntityRef this)
 {
-    (void*)this;
-    return NULL;
+    return ArtemisEntityManagerIsEnaled(this->entityManager, this->id);
 }
 
 /**
@@ -176,9 +179,7 @@ bool ArtemisEntityIsEnabled(ArtemisEntityRef this)
  */
 CFObjectRef ArtemisEntityGetComponent(ArtemisEntityRef this, ArtemisComponentTypeRef type)
 {
-    (void*)this;
-    (void*)type;
-    return NULL;
+    return ArtemisComponentManagerGetComponent(this->componentManager, this, type);
 }
 
 /**
@@ -194,9 +195,7 @@ CFObjectRef ArtemisEntityGetComponent(ArtemisEntityRef this, ArtemisComponentTyp
  */
 CFObjectRef ArtemisEntityGetComponentByType(ArtemisEntityRef this, CFClassRef cls)
 {
-    (void*)this;
-    (void*)cls;
-    return NULL;
+    return ArtemisComponentManagerGetComponent(this->componentManager, this, ArtemisEntityGetTypeFor(this, cls));
 }
 
 /**
@@ -206,11 +205,9 @@ CFObjectRef ArtemisEntityGetComponentByType(ArtemisEntityRef this, CFClassRef cl
  * @param fillBag the bag to put the components into.
  * @return the fillBag with the components in.
  */
-CFArrayRef ArtemisEntityGetComponents(ArtemisEntityRef this, CFArrayRef components)
+CFArrayRef ArtemisEntityGetComponents(ArtemisEntityRef this, CFArrayRef fillBag)
 {
-    (void*)this;
-    (void*)components;
-    return NULL;
+    return ArtemisComponentManagerGetComponentsFor(this->componentManager, this, fillBag);
 }
 
 /**
@@ -221,7 +218,7 @@ CFArrayRef ArtemisEntityGetComponents(ArtemisEntityRef this, CFArrayRef componen
  */
 void ArtemisEntityAddToWorld(ArtemisEntityRef this)
 {
-    (void*)this;
+    ArtemisWorldAddEntity(this->world, this);
 }
 
 /**
@@ -229,7 +226,7 @@ void ArtemisEntityAddToWorld(ArtemisEntityRef this)
  */
 void ArtemisEntityChangeInWorld(ArtemisEntityRef this)
 {
-    (void*)this;
+    ArtemisWorldChangedEntity(this->world, this);
 }
 
 /**
@@ -237,7 +234,7 @@ void ArtemisEntityChangeInWorld(ArtemisEntityRef this)
  */
 void ArtemisEntityDeleteFromWorld(ArtemisEntityRef this)
 {
-    (void*)this;
+    ArtemisWorldDeleteEntity(this->world, this);
 }
 
 /**
@@ -246,7 +243,7 @@ void ArtemisEntityDeleteFromWorld(ArtemisEntityRef this)
  */
 void ArtemisEntityEnable(ArtemisEntityRef this)
 {
-    (void*)this;
+    ArtemisWorldEnable(this->world, this);
 }
 
 /**
@@ -255,7 +252,7 @@ void ArtemisEntityEnable(ArtemisEntityRef this)
  */
 void ArtemisEntityDisable(ArtemisEntityRef this)
 {
-    (void*)this;
+    ArtemisWorldDisable(this->world, this);
 }
 
 /**
@@ -265,8 +262,7 @@ void ArtemisEntityDisable(ArtemisEntityRef this)
  */
 CFStringRef ArtemisEntityGetUUID(ArtemisEntityRef this)
 {
-    (void*)this;
-    return NULL;
+    return CFUUIDToString(this->uuid);
 }
 
 /**
@@ -275,8 +271,7 @@ CFStringRef ArtemisEntityGetUUID(ArtemisEntityRef this)
  */
 ArtemisWorldRef ArtemisEntityGetWorld(ArtemisEntityRef this)
 {
-    (void*)this;
-    return NULL;
+    return this->world;
 }
 
 /**

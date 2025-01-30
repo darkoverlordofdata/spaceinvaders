@@ -201,6 +201,11 @@ void ArtemisComponentManagerClean(ArtemisComponentManagerRef this)
     }
 }
 
+ArtemisComponentTypeFactoryRef ArtemisComponentManagerGetTypeFactory(ArtemisComponentManagerRef this)
+{
+    return this->typeFactory;
+}
+
 static struct __CFClass class = {
     .name = "ArtemisComponentManager",
     .size = sizeof(struct __ArtemisComponentManager),

@@ -21,7 +21,7 @@ double ArtemisWorldGetDelta(ArtemisWorldRef);
 void ArtemisWorldSetDelta(ArtemisWorldRef, double);
 void ArtemisWorldAddEntity(ArtemisWorldRef, ArtemisEntityRef);
 void ArtemisWorldChangedEntity(ArtemisWorldRef, ArtemisEntityRef);
-void ArtemisWorlDeleteEntity(ArtemisWorldRef, ArtemisEntityRef);
+void ArtemisWorldDeleteEntity(ArtemisWorldRef, ArtemisEntityRef);
 void ArtemisWorldEnable(ArtemisWorldRef, ArtemisEntityRef);
 void ArtemisWorldDisable(ArtemisWorldRef, ArtemisEntityRef);
 ArtemisEntityRef ArtemisWorldCreateEntity(ArtemisWorldRef, CFStringRef);

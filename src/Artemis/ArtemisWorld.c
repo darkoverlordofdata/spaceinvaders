@@ -94,7 +94,7 @@ void ArtemisWorldChangedEntity(ArtemisWorldRef this, ArtemisEntityRef e)
     (void*)e;
 }
 
-void ArtemisWorlDeleteEntity(ArtemisWorldRef this, ArtemisEntityRef e)
+void ArtemisWorldDeleteEntity(ArtemisWorldRef this, ArtemisEntityRef e)
 {
     (void*)e;
     (void*)this;
