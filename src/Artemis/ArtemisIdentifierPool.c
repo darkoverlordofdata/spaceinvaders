@@ -9,7 +9,7 @@
  */
 struct __ArtemisIdentifierPool {
     struct __CFObject   obj;
-    CFArrayRef ids;
+    CFBagRef ids;
     int nextAvailableId;
 };
 

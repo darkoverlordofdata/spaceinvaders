@@ -25,7 +25,7 @@ bool ArtemisEntityIsActive(ArtemisEntityRef);
 bool ArtemisEntityIsEnabled(ArtemisEntityRef);
 CFObjectRef ArtemisEntityGetComponent(ArtemisEntityRef, ArtemisComponentTypeRef);
 CFObjectRef ArtemisEntityGetComponentByType(ArtemisEntityRef, CFClassRef);
-CFArrayRef ArtemisEntityGetComponents(ArtemisEntityRef, CFArrayRef);
+CFBagRef ArtemisEntityGetComponents(ArtemisEntityRef, CFBagRef);
 void ArtemisEntityAddToWorld(ArtemisEntityRef);
 void ArtemisEntityChangeInWorld(ArtemisEntityRef);
 void ArtemisEntityDeleteFromWorld(ArtemisEntityRef);

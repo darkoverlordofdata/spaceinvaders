@@ -7,7 +7,7 @@
 struct __ArtemisEntityManager {
     struct __CFObject           obj;
     ArtemisWorldRef             world;
-    CFArrayRef                  entities;
+    CFBagRef                  entities;
     CFBitVectorRef              disabled;
     ulong                         active;
     ulong                         added;
@@ -43,7 +43,7 @@ void ArtemisEntityManagerAdded(ArtemisEntityManagerRef this, ArtemisEntityRef e)
 { 
     this->active++;
     this->added++;
-    CFArraySet(this->entities, ArtemisEntityGetId(e), e);
+    CFBagSet(this->entities, ArtemisEntityGetId(e), e);
 }
 
 void ArtemisEntityManagerEnabled(ArtemisEntityManagerRef this, ArtemisEntityRef e)
@@ -58,7 +58,7 @@ void ArtemisEntityManagerDisabled(ArtemisEntityManagerRef this, ArtemisEntityRef
 
 void ArtemisEntityManagerDeleted(ArtemisEntityManagerRef this, ArtemisEntityRef e)
 {
-    CFArraySet(this->entities, ArtemisEntityGetId(e), NULL);
+    CFBagSet(this->entities, ArtemisEntityGetId(e), NULL);
     CFBitVectorSetBitAtIndex(this->disabled, ArtemisEntityGetId(e), false);
     ArtemisIdentifierPoolCheckIn(this->identifierPool, ArtemisEntityGetId(e));
     this->active--;
@@ -74,7 +74,7 @@ void ArtemisEntityManagerDeleted(ArtemisEntityManagerRef this, ArtemisEntityRef 
  */
 bool ArtemisEntityManagerIsActive(ArtemisEntityManagerRef this, ulong id)
 { 
-    return (CFArrayGet(this->entities, id) != NULL);
+    return (CFBagGet(this->entities, id) != NULL);
 }
 
 /**
@@ -96,7 +96,7 @@ bool ArtemisEntityManagerIsEnabled(ArtemisEntityManagerRef this, ulong entityId)
  */
 ArtemisEntityRef ArtemisEntityManageGetEntity(ArtemisEntityManagerRef this, ulong entityId)
 {
-    return CFArrayGet(this->entities, entityId);
+    return CFBagGet(this->entities, entityId);
 }
 
 /**

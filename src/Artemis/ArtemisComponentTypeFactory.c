@@ -15,7 +15,7 @@ struct __ArtemisComponentTypeFactory {
     /** Amount of generated component types. */
     ulong                       componentTypeCount;
     /** Index of this component type in componentTypes. */
-    CFArrayRef                  types;
+    CFBagRef                  types;
 
 };
 
@@ -51,7 +51,7 @@ ArtemisComponentTypeRef ArtemisComponentTypeFactoryGetTypeFor(ArtemisComponentTy
         ulong index = this->componentTypeCount++;
         type = CFCreate(ArtemisComponentType, cls , index);
         CFMapSet(this->componentTypes, CFCreate(CFString, cls->name), type);
-        CFArraySet(this->types, index, type);
+        CFBagSet(this->types, index, type);
     }
     return type;
 }
@@ -71,7 +71,7 @@ ulong ArtemisComponentTypeFactoryGetIndexFor(ArtemisComponentTypeFactoryRef this
 
 ArtemisTaxonomy ArtemisComponentTypeFactoryGetTaxonomy(ArtemisComponentTypeFactoryRef this, ulong index)
 {
-    return ArtemisComponentTypeGetTaxonomy(CFArrayGet(this->types, index));
+    return ArtemisComponentTypeGetTaxonomy(CFBagGet(this->types, index));
 }
 
 static struct __CFClass class = {

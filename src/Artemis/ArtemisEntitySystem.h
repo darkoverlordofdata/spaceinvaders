@@ -13,7 +13,7 @@ typedef struct __ArtemisEntity*         ArtemisEntityRef;
 void ArtemisEntitySystemBegin(ArtemisEntitySystemRef);
 void ArtemisEntitySystemProcess(ArtemisEntitySystemRef);
 void ArtemisEntitySystemEnd(ArtemisEntitySystemRef);
-void ArtemisEntitySystemProcessEntities(ArtemisEntitySystemRef, CFArrayRef);
+void ArtemisEntitySystemProcessEntities(ArtemisEntitySystemRef, CFBagRef);
 bool ArtemisEntitySystemCheckProcessing(ArtemisEntitySystemRef);
 void ArtemisEntitySystemInitialize(ArtemisEntitySystemRef);
 void ArtemisEntitySystemInserted(ArtemisEntitySystemRef, ArtemisEntityRef);
@@ -29,6 +29,6 @@ void ArtemisEntitySystemEnabled(ArtemisEntitySystemRef, ArtemisEntityRef);
 void ArtemisEntitySystemSetWorld(ArtemisEntitySystemRef, ArtemisWorldRef);
 bool ArtemisEntitySystemIsPassive(ArtemisEntitySystemRef);
 void ArtemisEntitySystemSetPassive(ArtemisEntitySystemRef, bool);
-CFArrayRef ArtemisEntitySystemGetActive(ArtemisEntitySystemRef);
+CFBagRef ArtemisEntitySystemGetActive(ArtemisEntitySystemRef);
 
 

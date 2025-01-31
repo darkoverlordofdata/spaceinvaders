@@ -8,6 +8,7 @@
 #include "CF/CFClass.h"     // IWYU pragma: keep
 #include "CF/CFObject.h"    // IWYU pragma: keep
 #include "CF/CFArray.h"     // IWYU pragma: keep
+#include "CF/CFBag.h"     // IWYU pragma: keep
 #include "CF/CFBool.h"      // IWYU pragma: keep
 #include "CF/CFBox.h"       // IWYU pragma: keep
 #include "CF/CFDouble.h"    // IWYU pragma: keep

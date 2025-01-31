@@ -4,9 +4,9 @@
 */
 struct __ArtemisComponentManager {
     struct __CFObject                   obj;
-    CFArrayRef                          componentsByType;
+    CFBagRef                            componentsByType;
     ArtemisComponentPoolRef             pooledComponents;
-    CFArrayRef                          deleted;
+    CFBagRef                            deleted;
     ArtemisComponentTypeFactoryRef      typeFactory;
     ArtemisWorldRef                     world;
 };
@@ -66,11 +66,11 @@ void ArtemisComponentManagerRemoveComponentsOfEntity(ArtemisComponentManagerRef 
         if (CFBitVectorGetBitAtIndex(componentBits, i)) {
             switch (ArtemisComponentTypeFactoryGetTaxonomy(this->typeFactory, i)) {
                 case ArtemisTaxonomy_BASIC:
-                    CFArraySet(this->componentsByType, ArtemisEntityGetId(e), NULL);
+                    CFBagSet(this->componentsByType, ArtemisEntityGetId(e), NULL);
                     break;
 
                 case ArtemisTaxonomy_POOLED:
-                    CFArraySet(this->componentsByType, ArtemisEntityGetId(e), NULL);
+                    CFBagSet(this->componentsByType, ArtemisEntityGetId(e), NULL);
                     break;
         
                 default:
@@ -96,12 +96,12 @@ void ArtemisComponentManagerRemoveComponentsOfEntity(ArtemisComponentManagerRef 
  */
 void ArtemisComponentManagerAddComponent(ArtemisComponentManagerRef this, ArtemisEntityRef e, ArtemisComponentTypeRef type, CFObjectRef component)
 {
-    CFArrayRef components = CFArrayGet(this->componentsByType, ArtemisComponentTypeGetIndex(type));
+    CFBagRef components = CFBagGet(this->componentsByType, ArtemisComponentTypeGetIndex(type));
     if (components == NULL) {
         components = CFCreate(CFArray, NULL);
-        CFArraySet(this->componentsByType, ArtemisComponentTypeGetIndex(type), components);
+        CFBagSet(this->componentsByType, ArtemisComponentTypeGetIndex(type), components);
     }
-    CFArraySet(components, ArtemisEntityGetId(e), component);
+    CFBagSet(components, ArtemisEntityGetId(e), component);
     CFBitVectorSetBitAtIndex(ArtemisEntityGetComponentBits(e), ArtemisComponentTypeGetIndex(type), true);
 }
 
@@ -118,12 +118,12 @@ void ArtemisComponentManagerRemoveComponent(ArtemisComponentManagerRef this, Art
     ulong index = ArtemisComponentTypeGetIndex(type);
     switch (ArtemisComponentTypeGetTaxonomy(type)) {
         case ArtemisTaxonomy_BASIC:
-            CFArraySet(this->componentsByType, ArtemisEntityGetId(e), NULL);
+            CFBagSet(this->componentsByType, ArtemisEntityGetId(e), NULL);
             CFBitVectorSetBitAtIndex(ArtemisEntityGetComponentBits(e), index, false);
             break;
 
         case ArtemisTaxonomy_POOLED:
-            CFArraySet(this->componentsByType, ArtemisEntityGetId(e), NULL);
+            CFBagSet(this->componentsByType, ArtemisEntityGetId(e), NULL);
             CFBitVectorSetBitAtIndex(ArtemisEntityGetComponentBits(e), index, false);
             break;
  
@@ -140,12 +140,12 @@ void ArtemisComponentManagerRemoveComponent(ArtemisComponentManagerRef this, Art
  *            the type of components to get
  * @return a bag containing all components of the given type
  */
-CFArrayRef ArtemisComponentManagerGetComponentsByType(ArtemisComponentManagerRef this, ArtemisComponentTypeRef type)
+CFBagRef ArtemisComponentManagerGetComponentsByType(ArtemisComponentManagerRef this, ArtemisComponentTypeRef type)
 {
-    CFArrayRef components = CFArrayGet(this->componentsByType, ArtemisComponentTypeGetIndex(type));
+    CFBagRef components = CFBagGet(this->componentsByType, ArtemisComponentTypeGetIndex(type));
     if (components == NULL) {
         components = CFCreate(CFArray, NULL);
-        CFArraySet(this->componentsByType, ArtemisComponentTypeGetIndex(type), components);   
+        CFBagSet(this->componentsByType, ArtemisComponentTypeGetIndex(type), components);   
     }
     return components;
 }
@@ -161,9 +161,9 @@ CFArrayRef ArtemisComponentManagerGetComponentsByType(ArtemisComponentManagerRef
  */
 CFObjectRef ArtemisComponentManagerGetComponent(ArtemisComponentManagerRef this, ArtemisEntityRef e, ArtemisComponentTypeRef type)
 {
-    CFArrayRef components = CFArrayGet(this->componentsByType, ArtemisComponentTypeGetIndex(type));
+    CFBagRef components = CFBagGet(this->componentsByType, ArtemisComponentTypeGetIndex(type));
     if (components != NULL) {
-        return CFArrayGet(components, ArtemisEntityGetId(e));
+        return CFBagGet(components, ArtemisEntityGetId(e));
     }
     return NULL;
 }
@@ -177,26 +177,26 @@ CFObjectRef ArtemisComponentManagerGetComponent(ArtemisComponentManagerRef this,
  *            a bag to be filled with components
  * @return the {@code fillBag}, filled with the entities components
  */
-CFArrayRef ArtemisComponentManagerGetComponentsFor(ArtemisComponentManagerRef this, ArtemisEntityRef e, CFArrayRef fillBag){
+CFBagRef ArtemisComponentManagerGetComponentsFor(ArtemisComponentManagerRef this, ArtemisEntityRef e, CFBagRef fillBag){
 
     CFBitVectorRef componentBits = ArtemisEntityGetComponentBits(e);
     for (ulong i = 0; i<CFBitVectorGetCount(componentBits); i++) {
-        CFArrayRef c = CFArrayGet(this->componentsByType, i);
-        CFArrayPush(fillBag, CFArrayGet(c, ArtemisEntityGetId(e)));
+        CFBagRef c = CFBagGet(this->componentsByType, i);
+        CFBagAdd(fillBag, CFBagGet(c, ArtemisEntityGetId(e)));
     } 
     return fillBag;
 }
 
 void ArtemisComponentManagerDeleted(ArtemisComponentManagerRef this, ArtemisEntityRef e)
 {
-    CFArrayPush(this->deleted, e);
+    CFBagAdd(this->deleted, e);
 }
 
 void ArtemisComponentManagerClean(ArtemisComponentManagerRef this)
 {
-    if (CFArraySize(this->deleted) > 0) {
-        for (ulong i=0; CFArraySize(this->deleted) > i; i++) {
-            ArtemisComponentManagerRemoveComponentsOfEntity(this, CFArrayGet(this->deleted, i));
+    if (CFBagSize(this->deleted) > 0) {
+        for (ulong i=0; CFBagSize(this->deleted) > i; i++) {
+            ArtemisComponentManagerRemoveComponentsOfEntity(this, CFBagGet(this->deleted, i));
         }
     }
 }

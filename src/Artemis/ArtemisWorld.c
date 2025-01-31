@@ -14,11 +14,11 @@ struct __ArtemisWorld {
     float                       delta;
     CFMapRef                    managers;
     CFMapRef                    systems;
-    CFArrayRef                  added;
-    CFArrayRef                  changed;
-    CFArrayRef                  deleted;
-    CFArrayRef                  enable;
-    CFArrayRef                  disable;
+    CFBagRef                  added;
+    CFBagRef                  changed;
+    CFBagRef                  deleted;
+    CFBagRef                  enable;
+    CFBagRef                  disable;
     ArtemisEntityManagerRef     em;
     ArtemisComponentManagerRef  cm;
 };
@@ -125,7 +125,7 @@ ArtemisEntityRef ArtemisWorldGetEntity(ArtemisWorldRef this, ulong id)
     return NULL;
 }
 
-CFArrayRef ArtemisWorldGetSystems(ArtemisWorldRef this)
+CFBagRef ArtemisWorldGetSystems(ArtemisWorldRef this)
 {
     (void*)this;
     return NULL;
@@ -162,7 +162,7 @@ ArtemisEntitySystemRef ArtemisWorldGetSystem(ArtemisWorldRef this, CFClassRef cl
     return NULL;
 }
 
-void ArtemisWorldCheck(ArtemisWorldRef this, CFArrayRef, CFObjectRef o)
+void ArtemisWorldCheck(ArtemisWorldRef this, CFBagRef, CFObjectRef o)
 {
     (void*)this;
     (void*)o;

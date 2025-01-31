@@ -8,7 +8,7 @@ struct __ArtemisComponentMapper {
     ArtemisWorldRef                     world;
     ArtemisComponentTypeRef             type;
     CFClassRef                          classType;
-    CFArrayRef                          components;
+    CFBagRef                            components;
 };
 
 
@@ -42,7 +42,7 @@ static bool ctor(void *ptr, va_list args)
  */
 CFObjectRef ArtemisComponentMapperGet(ArtemisComponentMapperRef this, ArtemisEntityRef e)
 {
-    return CFArrayGet(this->components, ArtemisEntityGetId(e));
+    return CFBagGet(this->components, ArtemisEntityGetId(e));
 }
 
 /**
@@ -54,7 +54,7 @@ CFObjectRef ArtemisComponentMapperGet(ArtemisComponentMapperRef this, ArtemisEnt
  */
 CFObjectRef ArtemisComponentMapperGetSafe(ArtemisComponentMapperRef this, ArtemisEntityRef e)
 {
-    return CFArrayGet(this->components, ArtemisEntityGetId(e));
+    return CFBagGet(this->components, ArtemisEntityGetId(e));
 }
 
 /**

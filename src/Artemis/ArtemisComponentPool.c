@@ -11,7 +11,7 @@
 */
 struct __ArtemisComponentPool {
     struct __CFObject           obj;
-    CFArrayRef                  pools;
+    CFBagRef                  pools;
 };
 
 static bool ctor(void *ptr, va_list args)

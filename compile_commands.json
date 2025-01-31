@@ -316,6 +316,33 @@
       "-flto",
       "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
+      "build/CF/CFBag.o",
+      "src/CF/CFBag.c"
+    ],
+    "directory": "/home/darko/Documents/GitHub/spaceinvaders",
+    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/CF/CFBag.c",
+    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/CF/CFBag.o"
+  },
+  {
+    "arguments": [
+      "/opt/wasi-sdk/bin/clang",
+      "--sysroot=/opt/wasi-sdk/share/wasi-sysroot",
+      "-c",
+      "-std=c2x",
+      "-fblocks",
+      "-W",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-unused",
+      "-Wconversion",
+      "-Wsign-conversion",
+      "-fno-exceptions",
+      "-DNDEBUG",
+      "-Oz",
+      "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
+      "-o",
       "build/CF/CFBitVector.o",
       "src/CF/CFBitVector.c"
     ],

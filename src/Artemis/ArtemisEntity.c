@@ -205,7 +205,7 @@ CFObjectRef ArtemisEntityGetComponentByType(ArtemisEntityRef this, CFClassRef cl
  * @param fillBag the bag to put the components into.
  * @return the fillBag with the components in.
  */
-CFArrayRef ArtemisEntityGetComponents(ArtemisEntityRef this, CFArrayRef fillBag)
+CFBagRef ArtemisEntityGetComponents(ArtemisEntityRef this, CFBagRef fillBag)
 {
     return ArtemisComponentManagerGetComponentsFor(this->componentManager, this, fillBag);
 }
