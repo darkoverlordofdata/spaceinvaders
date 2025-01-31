@@ -10,7 +10,7 @@
 struct __ArtemisIdentifierPool {
     struct __CFObject   obj;
     CFBagRef ids;
-    int nextAvailableId;
+    ulong nextAvailableId;
 };
 
 static bool ctor(void *ptr, va_list args)
@@ -18,21 +18,22 @@ static bool ctor(void *ptr, va_list args)
     (void*)args;
 
     ArtemisIdentifierPoolRef this = ptr;     
-    this->ids = CFCreate(CFArray, NULL);
+    this->ids = CFCreate(CFBag,64);
 
     return true;
 }
 
 ulong ArtemisIdentifierPoolCheckOut(ArtemisIdentifierPoolRef this)
 {
-    (void*)this;
-    return 0;
+    if (CFBagSize(this->ids) > 0) {
+        return (ulong)CFIntValue(CFBagRemoveLast(this->ids));
+    }
+    return this->nextAvailableId;
 }
 
 void ArtemisIdentifierPoolCheckIn(ArtemisIdentifierPoolRef this, ulong index)
 {
-    (void*)this;
-    (void)index;
+    CFBagAdd(this->ids, CFIntCreate((int64_t)index));
 }
 
 static struct __CFClass class = {

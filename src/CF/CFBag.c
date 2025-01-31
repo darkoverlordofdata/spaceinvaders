@@ -62,6 +62,7 @@ ctor(void *ptr, va_list args)
     this->data = NULL;
     this->size = 0;
     this->length = va_arg(args, size_t);
+    if (this->length == 0) this->length = 64;
     this->data = malloc(sizeof(void*) * this->length); 
     return true;
 }
@@ -83,20 +84,17 @@ static bool
 equal(void *ptr1, void *ptr2)
 {
     CFObjectRef obj2 = ptr2;
-    CFBagRef this1, this2;
-    size_t i;
-
     if (obj2->cls != CFBag)
         return false;
 
-    this1 = ptr1;
-    this2 = ptr2;
+    CFBagRef this = ptr1;
+    CFBagRef that = ptr2;
 
-    if (this1->size != this2->size)
+    if (this->size != that->size)
         return false;
 
-    for (i = 0; i < this1->size; i++)
-        if (CFEqual(this1->data[i], this2->data[i]))
+    for (size_t i = 0; i < this->size; i++)
+        if (CFEqual(this->data[i], that->data[i]))
             return false;
 
     return true;
@@ -106,12 +104,11 @@ static uint32_t
 hash(void *ptr)
 {
     CFBagRef this = ptr;
-    size_t i;
     uint32_t hash;
 
     CF_HASH_INIT(hash);
 
-    for (i = 0; i < this->size; i++)
+    for (size_t i = 0; i < this->size; i++)
         CF_HASH_ADD_HASH(hash, CFHash(this->data[i]));
 
     CF_HASH_FINALIZE(hash);
@@ -124,7 +121,6 @@ copy(void *ptr)
 {
     CFBagRef this = ptr;
     CFBagRef new;
-    size_t i;
 
     if ((new = CFNew(CFBag, (void*)NULL)) == NULL)
         return NULL;
@@ -135,7 +131,7 @@ copy(void *ptr)
     }
     new->size = this->size;
 
-    for (i = 0; i < this->size; i++)
+    for (size_t i = 0; i < this->size; i++)
         new->data[i] = CFRef(this->data[i]);
 
     return new;
