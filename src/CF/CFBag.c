@@ -40,10 +40,10 @@
  * entities, speedwise it is very good, especially suited for games.
  */
 struct __CFBag {
-	struct __CFObject obj;
-	void **data;
+    struct __CFObject obj;
+    void **data;
     size_t length;
-	size_t size;
+    size_t size;
 };
 
 /**
@@ -56,89 +56,89 @@ struct __CFBag {
 static bool
 ctor(void *ptr, va_list args)
 {
-	CFBagRef this = ptr;
-	void *obj;
+    CFBagRef this = ptr;
+    void *obj;
 
-	this->data = NULL;
-	this->size = 0;
+    this->data = NULL;
+    this->size = 0;
     this->length = va_arg(args, size_t);
-	this->data = malloc(sizeof(void*) * this->length); 
-	return true;
+    this->data = malloc(sizeof(void*) * this->length); 
+    return true;
 }
 
 static void
 dtor(void *ptr)
 {
-	CFBagRef this = ptr;
-	size_t i;
+    CFBagRef this = ptr;
+    size_t i;
 
-	for (i = 0; i < this->size; i++)
-		CFUnref(this->data[i]);
+    for (i = 0; i < this->size; i++)
+        CFUnref(this->data[i]);
 
-	if (this->data != NULL)
-		free(this->data);
+    if (this->data != NULL)
+        free(this->data);
 }
 
 static bool
 equal(void *ptr1, void *ptr2)
 {
-	CFObjectRef obj2 = ptr2;
-	CFBagRef this1, this2;
-	size_t i;
+    CFObjectRef obj2 = ptr2;
+    CFBagRef this1, this2;
+    size_t i;
 
-	if (obj2->cls != CFBag)
-		return false;
+    if (obj2->cls != CFBag)
+        return false;
 
-	this1 = ptr1;
-	this2 = ptr2;
+    this1 = ptr1;
+    this2 = ptr2;
 
-	if (this1->size != this2->size)
-		return false;
+    if (this1->size != this2->size)
+        return false;
 
-	for (i = 0; i < this1->size; i++)
-		if (CFEqual(this1->data[i], this2->data[i]))
-			return false;
+    for (i = 0; i < this1->size; i++)
+        if (CFEqual(this1->data[i], this2->data[i]))
+            return false;
 
-	return true;
+    return true;
 }
 
 static uint32_t
 hash(void *ptr)
 {
-	CFBagRef this = ptr;
-	size_t i;
-	uint32_t hash;
+    CFBagRef this = ptr;
+    size_t i;
+    uint32_t hash;
 
-	CF_HASH_INIT(hash);
+    CF_HASH_INIT(hash);
 
-	for (i = 0; i < this->size; i++)
-		CF_HASH_ADD_HASH(hash, CFHash(this->data[i]));
+    for (i = 0; i < this->size; i++)
+        CF_HASH_ADD_HASH(hash, CFHash(this->data[i]));
 
-	CF_HASH_FINALIZE(hash);
+    CF_HASH_FINALIZE(hash);
 
-	return hash;
+    return hash;
 }
 
 static void*
 copy(void *ptr)
 {
-	CFBagRef this = ptr;
-	CFBagRef new;
-	size_t i;
+    CFBagRef this = ptr;
+    CFBagRef new;
+    size_t i;
 
-	if ((new = CFNew(CFBag, (void*)NULL)) == NULL)
-		return NULL;
+    if ((new = CFNew(CFBag, (void*)NULL)) == NULL)
+        return NULL;
 
-	if ((new->data = malloc(sizeof(void*) * this->size)) == NULL) {
-		CFUnref(new);
-		return NULL;
-	}
-	new->size = this->size;
+    if ((new->data = malloc(sizeof(void*) * this->size)) == NULL) {
+        CFUnref(new);
+        return NULL;
+    }
+    new->size = this->size;
 
-	for (i = 0; i < this->size; i++)
-		new->data[i] = CFRef(this->data[i]);
+    for (i = 0; i < this->size; i++)
+        new->data[i] = CFRef(this->data[i]);
 
-	return new;
+    return new;
 }
 
 
@@ -378,12 +378,12 @@ void CFBagAddAll(CFBagRef this, CFBagRef items)
 
 
 static struct __CFClass class = {
-	.name = "CFBag",
-	.size = sizeof(struct __CFBag),
-	.ctor = ctor,
-	.dtor = dtor,
-	.equal = equal,
-	.hash = hash,
-	.copy = copy
+    .name = "CFBag",
+    .size = sizeof(struct __CFBag),
+    .ctor = ctor,
+    .dtor = dtor,
+    .equal = equal,
+    .hash = hash,
+    .copy = copy
 };
 CFClassRef CFBag = &class;
