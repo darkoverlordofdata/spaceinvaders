@@ -4,19 +4,6 @@
 /**
  *
  */
-struct __ArtemisEntityManager {
-    struct __CFObject           obj;
-    ArtemisWorldRef             world;
-    CFBagRef                  entities;
-    CFBitVectorRef              disabled;
-    ulong                         active;
-    ulong                         added;
-    ulong                         created;
-    ulong                         deleted;
-    ArtemisIdentifierPoolRef    identifierPool;
-
-};
-
 static bool ctor(void *ptr, va_list args)
 {
     (void*)args;
@@ -29,7 +16,20 @@ static bool ctor(void *ptr, va_list args)
     this->added = 0;
     this->created = 0;
     this->deleted = 0;
+
+    static struct ArtemisManagerVtbl const vtbl = { &ArtemisEntityManagerAdded, 
+                                                    &ArtemisEntityManagerChanged,
+                                                    &ArtemisEntityManagerDeleted,
+                                                    &ArtemisEntityManagerDisabled,
+                                                    &ArtemisEntityManagerEnabled };
+    this->base.vptr = &vtbl;               
+
     return true;
+}
+
+void ArtemisEntityManageSetWorld(ArtemisEntityManagerRef this, ArtemisWorldRef world)
+{
+    this->base.world = world;
 }
 
 ArtemisEntityRef ArtemisEntityManagerCreateEntityInstance(ArtemisEntityManagerRef this, CFStringRef name)
@@ -39,31 +39,6 @@ ArtemisEntityRef ArtemisEntityManagerCreateEntityInstance(ArtemisEntityManagerRe
     return e;
 }
 
-void ArtemisEntityManagerAdded(ArtemisEntityManagerRef this, ArtemisEntityRef e)
-{ 
-    this->active++;
-    this->added++;
-    CFBagSet(this->entities, ArtemisEntityGetId(e), e);
-}
-
-void ArtemisEntityManagerEnabled(ArtemisEntityManagerRef this, ArtemisEntityRef e)
-{ 
-    CFBitVectorSetBitAtIndex(this->disabled, ArtemisEntityGetId(e), false);
-}
-
-void ArtemisEntityManagerDisabled(ArtemisEntityManagerRef this, ArtemisEntityRef e)
-{ 
-    CFBitVectorSetBitAtIndex(this->disabled, ArtemisEntityGetId(e), true);
-}
-
-void ArtemisEntityManagerDeleted(ArtemisEntityManagerRef this, ArtemisEntityRef e)
-{
-    CFBagSet(this->entities, ArtemisEntityGetId(e), NULL);
-    CFBitVectorSetBitAtIndex(this->disabled, ArtemisEntityGetId(e), false);
-    ArtemisIdentifierPoolCheckIn(this->identifierPool, ArtemisEntityGetId(e));
-    this->active--;
-    this->deleted++;
-}
 
 /**
  * Check if this entity is active.

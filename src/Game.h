@@ -21,8 +21,9 @@ struct __Game {
     UInt32 enemyXMovement;
     UInt32 enemyYMovement;
     EntityRef player;
-    CFArrayRef enemies;
-    CFArrayRef bullets;
+    // CFArrayRef enemies;
+    // CFArrayRef bullets;
+    CFArrayRef entities;
     DrawSystemRef drawSystem;
     CollisionSystemRef collisionSystem;
     InputSystemRef inputSystem;

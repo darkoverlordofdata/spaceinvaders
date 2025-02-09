@@ -19,12 +19,12 @@
       "-flto",
       "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
-      "build/Component.o",
-      "src/Component.c"
+      "build/printf.o",
+      "src/printf.c"
     ],
     "directory": "/home/darko/Documents/GitHub/spaceinvaders",
-    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/Component.c",
-    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/Component.o"
+    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/printf.c",
+    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/printf.o"
   },
   {
     "arguments": [
@@ -46,12 +46,12 @@
       "-flto",
       "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
-      "build/Entity.o",
-      "src/Entity.c"
+      "build/rect.o",
+      "src/rect.c"
     ],
     "directory": "/home/darko/Documents/GitHub/spaceinvaders",
-    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/Entity.c",
-    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/Entity.o"
+    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/rect.c",
+    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/rect.o"
   },
   {
     "arguments": [
@@ -73,93 +73,12 @@
       "-flto",
       "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
       "-o",
-      "build/Factory.o",
-      "src/Factory.c"
+      "build/shape.o",
+      "src/shape.c"
     ],
     "directory": "/home/darko/Documents/GitHub/spaceinvaders",
-    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/Factory.c",
-    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/Factory.o"
-  },
-  {
-    "arguments": [
-      "/opt/wasi-sdk/bin/clang",
-      "--sysroot=/opt/wasi-sdk/share/wasi-sysroot",
-      "-c",
-      "-std=c2x",
-      "-fblocks",
-      "-W",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-Wno-unused",
-      "-Wconversion",
-      "-Wsign-conversion",
-      "-fno-exceptions",
-      "-DNDEBUG",
-      "-Oz",
-      "-flto",
-      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
-      "-o",
-      "build/Game.o",
-      "src/Game.c"
-    ],
-    "directory": "/home/darko/Documents/GitHub/spaceinvaders",
-    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/Game.c",
-    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/Game.o"
-  },
-  {
-    "arguments": [
-      "/opt/wasi-sdk/bin/clang",
-      "--sysroot=/opt/wasi-sdk/share/wasi-sysroot",
-      "-c",
-      "-std=c2x",
-      "-fblocks",
-      "-W",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-Wno-unused",
-      "-Wconversion",
-      "-Wsign-conversion",
-      "-fno-exceptions",
-      "-DNDEBUG",
-      "-Oz",
-      "-flto",
-      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
-      "-o",
-      "build/main.o",
-      "src/main.c"
-    ],
-    "directory": "/home/darko/Documents/GitHub/spaceinvaders",
-    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/main.c",
-    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/main.o"
-  },
-  {
-    "arguments": [
-      "/opt/wasi-sdk/bin/clang",
-      "--sysroot=/opt/wasi-sdk/share/wasi-sysroot",
-      "-c",
-      "-std=c2x",
-      "-fblocks",
-      "-W",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-Wno-unused",
-      "-Wconversion",
-      "-Wsign-conversion",
-      "-fno-exceptions",
-      "-DNDEBUG",
-      "-Oz",
-      "-flto",
-      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
-      "-o",
-      "build/Position.o",
-      "src/Position.c"
-    ],
-    "directory": "/home/darko/Documents/GitHub/spaceinvaders",
-    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/Position.c",
-    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/Position.o"
+    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/shape.c",
+    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/shape.o"
   },
   {
     "arguments": [
@@ -1105,6 +1024,33 @@
     "directory": "/home/darko/Documents/GitHub/spaceinvaders",
     "file": "/home/darko/Documents/GitHub/spaceinvaders/src/Artemis/ArtemisIdentifierPool.c",
     "output": "/home/darko/Documents/GitHub/spaceinvaders/build/Artemis/ArtemisIdentifierPool.o"
+  },
+  {
+    "arguments": [
+      "/opt/wasi-sdk/bin/clang",
+      "--sysroot=/opt/wasi-sdk/share/wasi-sysroot",
+      "-c",
+      "-std=c2x",
+      "-fblocks",
+      "-W",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-unused",
+      "-Wconversion",
+      "-Wsign-conversion",
+      "-fno-exceptions",
+      "-DNDEBUG",
+      "-Oz",
+      "-flto",
+      "-I/opt/wasi-sdk/share/wasi-sysroot/include/wasm32-wasi/",
+      "-o",
+      "build/Artemis/ArtemisManager.o",
+      "src/Artemis/ArtemisManager.c"
+    ],
+    "directory": "/home/darko/Documents/GitHub/spaceinvaders",
+    "file": "/home/darko/Documents/GitHub/spaceinvaders/src/Artemis/ArtemisManager.c",
+    "output": "/home/darko/Documents/GitHub/spaceinvaders/build/Artemis/ArtemisManager.o"
   },
   {
     "arguments": [

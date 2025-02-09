@@ -342,6 +342,17 @@ CFStringFindC(CFStringRef str, const char *substr, CFRange range)
 	return SIZE_MAX;
 }
 
+extern CFStringRef CFStringNew(const char* str)
+{
+	return CFNew(CFString, str);
+}
+
+extern CFStringRef CFStringCreate(const char* str)
+{
+	return CFCreate(CFString, str);
+}
+
+
 static struct __CFClass class = {
 	.name = "CFString",
 	.size = sizeof(struct __CFString),

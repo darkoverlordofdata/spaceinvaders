@@ -2,14 +2,6 @@
 /**
 *   Component Manager Class
 */
-struct __ArtemisComponentManager {
-    struct __CFObject                   obj;
-    CFBagRef                            componentsByType;
-    ArtemisComponentPoolRef             pooledComponents;
-    CFBagRef                            deleted;
-    ArtemisComponentTypeFactoryRef      typeFactory;
-    ArtemisWorldRef                     world;
-};
 
 static bool ctor(void *ptr, va_list args)
 {
@@ -20,7 +12,24 @@ static bool ctor(void *ptr, va_list args)
     this->deleted = CFCreate(CFArray, NULL);
     this->typeFactory = CFCreate(ArtemisComponentTypeFactory);
 
+    static struct ArtemisManagerVtbl const vtbl = { &ArtemisComponentManagerAdded, 
+                                                    &ArtemisComponentManagerChanged,
+                                                    &ArtemisComponentManagerDeleted,
+                                                    &ArtemisComponentManagerDisabled,
+                                                    &ArtemisComponentManagerEnabled };
+    this->base.vptr = &vtbl;               
     return true;
+}
+
+void ArtemisComponentManagerSetWorld(ArtemisComponentManagerRef this, ArtemisWorldRef world)
+{
+    this->base.world = world;
+}
+
+
+void ArtemisComponentManagerInitialize(ArtemisComponentManagerRef this)
+{
+    (void*)this;
 }
 
 CFObjectRef ArtemisComponentManagerCreate(ArtemisComponentManagerRef this, ArtemisEntityRef owner, CFClassRef componentClass)
@@ -47,7 +56,7 @@ CFObjectRef ArtemisComponentManagerCreate(ArtemisComponentManagerRef this, Artem
 CFObjectRef ArtemisComponentManagerNewInstance(ArtemisComponentManagerRef this, CFClassRef cls, bool constructorHasWorldParameter)
 {
     if (constructorHasWorldParameter) {
-        return CFCreate(cls, this->world);
+        return CFCreate(cls, this->base.world);
     } else {
         return CFCreate(cls);
     }
@@ -187,10 +196,6 @@ CFBagRef ArtemisComponentManagerGetComponentsFor(ArtemisComponentManagerRef this
     return fillBag;
 }
 
-void ArtemisComponentManagerDeleted(ArtemisComponentManagerRef this, ArtemisEntityRef e)
-{
-    CFBagAdd(this->deleted, e);
-}
 
 void ArtemisComponentManagerClean(ArtemisComponentManagerRef this)
 {

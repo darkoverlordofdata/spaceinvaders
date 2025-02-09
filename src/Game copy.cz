@@ -1,7 +1,4 @@
 #include "Game.h"
-#include "CF/CFObject.h"
-#include "Component.h"
-#include "Entity.h"
 #include "wasm4.h"
 #include "util.h"
 #include "Factory.h"
@@ -38,15 +35,14 @@ bool GameStart(GameRef this)
 	void (^initialize)() = ^{
 
 		this->player = CreatePlayer();
-        this->entities = CFCreate(CFArray, NULL);
-        CFArrayPush(this->entities, this->player);
-
+		this->bullets = CFCreate(CFArray, NULL);
 		for (int i=0; i<8; i++) {
-			CFArrayPush(this->entities, CreateBullet());
+			CFArrayPush(this->bullets, CreateBullet());
 		}
+		this->enemies = CFCreate(CFArray, NULL);
 		for (int row=0; row<3; row++) {
 			for (int col=1; col<9; col++) {
-				CFArrayPush(this->entities, CreateEnemy(17*col - 14, 17*row + 3));
+				CFArrayPush(this->enemies, CreateEnemy(17*col - 14, 17*row + 3));
 			}
 		}
 	};
@@ -94,12 +90,9 @@ bool GameOver(GameRef this)
         return true;
     }
     bool alive = false;
-    //this->enemies
-    for (ulong index=0; index < CFArraySize(this->entities); index++) {
-        EntityRef e = CFArrayGet(this->entities, index);
-        if (e->kind == EntityEnemy)  {
-            alive = alive | EntityIsAlive(e);
-        }   
+    for (ulong index=0; index < CFArraySize(this->enemies); index++) {
+        EntityRef enemy = CFArrayGet(this->enemies, index);
+        alive = alive | EntityIsAlive(enemy);
     }
  
     if(!alive) {
@@ -124,16 +117,14 @@ bool GameInputSystem(GameRef this)
     this->gunCooldown -= 1;
     FireBullet Fire = ^(UInt32 x, UInt32 y){
 
-        for (ulong index=0; index < CFArraySize(this->entities); index++) {
-            EntityRef bullet = CFArrayGet(this->entities, index);\
-            if (bullet->kind == EntityBullet) {
-                if (!EntityIsAlive(bullet)) {
-                    tone(800 | 200 << 16, 5, 100, TONE_TRIANGLE);
-                    this->gunCooldown = GunCooldownMax;
-                    EntitySetAlive(bullet, true);
-                    EntitySetPos(bullet, x, y);
-                    break;
-                }
+        for (ulong index=0; index < CFArraySize(this->bullets); index++) {
+            EntityRef bullet = CFArrayGet(this->bullets, index);
+            if (!EntityIsAlive(bullet)) {
+                tone(800 | 200 << 16, 5, 100, TONE_TRIANGLE);
+                this->gunCooldown = GunCooldownMax;
+                EntitySetAlive(bullet, true);
+                EntitySetPos(bullet, x, y);
+                break;
             }
         }
     };
@@ -163,18 +154,16 @@ bool GameMovementSystem(GameRef this)
 
     EntitySetPos(this->player, clamp((UInt32)(x+delta), 0, 160-w), y);
 
-    for (ulong index=0; index < CFArraySize(this->entities); index++) {
-        EntityRef bullet = CFArrayGet(this->entities, index);
-        if (bullet->kind == EntityBullet) {
-            if (EntityIsAlive(bullet)) {
-                UInt32 x1 = EntityX(bullet);
-                long y1 = (long)EntityY(bullet) - 4;
+    for (ulong index=0; index < CFArraySize(this->bullets); index++) {
+        EntityRef bullet = CFArrayGet(this->bullets, index);
+        if (EntityIsAlive(bullet)) {
+            UInt32 x1 = EntityX(bullet);
+            long y1 = (long)EntityY(bullet) - 4;
 
-                if (y1 < 0) {
-                    EntitySetAlive(bullet, false);
-                }
-                EntitySetPos(bullet, x1, (UInt32)y1);
+            if (y1 < 0) {
+                EntitySetAlive(bullet, false);
             }
+            EntitySetPos(bullet, x1, (UInt32)y1);
         }
     }
 
@@ -187,12 +176,10 @@ bool GameDrawSystem(GameRef this)
 {
     EntityDraw(this->player);
 
-    for (ulong index=0; index < CFArraySize(this->entities); index++) {
-        EntityRef bullet = CFArrayGet(this->entities, index);
-        if (bullet->kind == EntityBullet) {
-            if (EntityIsAlive(bullet)) {
-                EntityDraw(bullet);
-            }
+    for (ulong index=0; index < CFArraySize(this->bullets); index++) {
+        EntityRef bullet = CFArrayGet(this->bullets, index);
+        if (EntityIsAlive(bullet)) {
+            EntityDraw(bullet);
         }
     }
 
@@ -214,31 +201,26 @@ bool GameCollisionSystem(GameRef this)
         this->enemyXChangeDirectionTimer = XDirectionTimerReset;
     }
 
-    //this->enemies
-    for (ulong enemy_index=0; enemy_index < CFArraySize(this->entities); enemy_index++) {
-        EntityRef enemy = CFArrayGet(this->entities, enemy_index);
-        if (enemy->kind == EntityEnemy)   {
-            for (ulong bullet_index=0; bullet_index < CFArraySize(this->entities); bullet_index++) {
-                EntityRef bullet = CFArrayGet(this->entities, bullet_index);
-                if (bullet->kind == EntityBullet) {
-                    if (EntityIntersect(enemy, bullet)) {
-                        tone(800 | 200 << 16, 20, 70, TONE_NOISE);
-                        EntitySetAlive(bullet, false);
-                        EntitySetAlive(enemy, false);
-                    }
-                }
+    for (ulong enemy_index=0; enemy_index < CFArraySize(this->enemies); enemy_index++) {
+        EntityRef enemy = CFArrayGet(this->enemies, enemy_index);
+        for (ulong bullet_index=0; bullet_index < CFArraySize(this->bullets); bullet_index++) {
+            EntityRef bullet = CFArrayGet(this->bullets, bullet_index);
+            if (EntityIntersect(enemy, bullet)) {
+                tone(800 | 200 << 16, 20, 70, TONE_NOISE);
+                EntitySetAlive(bullet, false);
+                EntitySetAlive(enemy, false);
             }
-            if (this->enemyXTimer <= 0) {
-                UInt32 x1 = EntityX(enemy) + this->enemyXMovement;
-                UInt32 y1 = EntityY(enemy) + this->enemyYMovement;
-                EntitySetPos(enemy, x1, y1);
-                if (EntityIsAlive(enemy) && y1 > 120) {
-                    this->lost = true;
-                }
+        }
+        if (this->enemyXTimer <= 0) {
+            UInt32 x1 = EntityX(enemy) + this->enemyXMovement;
+            UInt32 y1 = EntityY(enemy) + this->enemyYMovement;
+            EntitySetPos(enemy, x1, y1);
+            if (EntityIsAlive(enemy) && y1 > 120) {
+                this->lost = true;
             }
-            if (EntityIsAlive(enemy)) {
-                EntityDraw(enemy);
-            }
+        }
+        if (EntityIsAlive(enemy)) {
+            EntityDraw(enemy);
         }
     }
 

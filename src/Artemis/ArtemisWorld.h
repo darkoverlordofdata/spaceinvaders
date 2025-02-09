@@ -1,5 +1,6 @@
 #pragma once
 #include "../corefw.h" // IWYU pragma: keep
+#include "ArtemisManager.h"
 /**
  *  @class ArtemisWorld
  */
@@ -12,7 +13,10 @@ typedef struct __ArtemisEntity*             ArtemisEntityRef;
 typedef struct __ArtemisEntitySystem*       ArtemisEntitySystemRef;
 typedef struct __ArtemisComponentMapper*    ArtemisComponentMapperRef;
 
+typedef void (^ArtemisPerform)(ArtemisManagerRef, ArtemisEntityRef);
+
 ArtemisEntityManagerRef ArtemisWorldGetEntityManager(ArtemisWorldRef);
+void ArtemisWorldInitialize(ArtemisWorldRef);
 ArtemisComponentManagerRef ArtemisWorldGetComponentManager(ArtemisWorldRef);
 CFObjectRef ArtemisWorldSetManager(ArtemisWorldRef, CFObjectRef);
 CFObjectRef ArtemisWorldGetManager(ArtemisWorldRef, CFClassRef);
@@ -29,10 +33,10 @@ ArtemisEntityRef ArtemisWorldGetEntity(ArtemisWorldRef, ulong);
 CFBagRef ArtemisWorldGetSystems(ArtemisWorldRef);
 ArtemisEntitySystemRef ArtemisWorldSetSystem(ArtemisWorldRef, ArtemisEntitySystemRef, bool);
 void ArtemisWorldDeleteSystem(ArtemisWorldRef, ArtemisEntitySystemRef);
-void ArtemisWorldNotifySystems(ArtemisWorldRef, CFObjectRef, ArtemisEntityRef);
-void ArtemisWorldNotifyManagers(ArtemisWorldRef, CFObjectRef, ArtemisEntityRef);
+void ArtemisWorldNotifySystems(ArtemisWorldRef, ArtemisPerform, ArtemisEntityRef);
+void ArtemisWorldNotifyManagers(ArtemisWorldRef, ArtemisPerform, ArtemisEntityRef);
 ArtemisEntitySystemRef ArtemisWorldGetSystem(ArtemisWorldRef, CFClassRef);
-void ArtemisWorldCheck(ArtemisWorldRef, CFBagRef, CFObjectRef);
+void ArtemisWorldCheck(ArtemisWorldRef, CFBagRef, ArtemisPerform);
 void ArtemisWorldProcess(ArtemisWorldRef);
 ArtemisComponentMapperRef ArtemisWorldGetMapper(ArtemisWorldRef, CFClassRef);
 void ArtemisWorldSetEntityTemplate(ArtemisWorldRef, CFStringRef, CFObjectRef);
